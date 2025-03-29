@@ -369,11 +369,11 @@
             color: #FF2D74;
             transition: color 0.3s;
         }
-        .anilist-icon {
-            width: 36px;
-            height: 36px;
+        .gallery-icon {
+            font-size: 2rem;
             margin-bottom: 15px;
-            transition: filter 0.3s;
+            color: #FF2D74;
+            transition: color 0.3s;
         }
         .feature-card h3 {
             font-size: 1.3rem;
@@ -630,6 +630,11 @@
         body.theme-light-green .feature-icon,
         body.theme-light-orange .feature-icon,
         body.theme-pink .feature-icon,
+        body.theme-dark-blue .gallery-icon,
+        body.theme-sky-blue .gallery-icon,
+        body.theme-light-green .gallery-icon,
+        body.theme-light-orange .gallery-icon,
+        body.theme-pink .gallery-icon,
         body.theme-dark-blue .profile-info i,
         body.theme-sky-blue .profile-info i,
         body.theme-light-green .profile-info i,
@@ -649,12 +654,7 @@
         body.theme-sky-blue .youtube-icon,
         body.theme-light-green .youtube-icon,
         body.theme-light-orange .youtube-icon,
-        body.theme-pink .youtube-icon,
-        body.theme-dark-blue .floating-search-btn,
-        body.theme-sky-blue .floating-search-btn,
-        body.theme-light-green .floating-search-btn,
-        body.theme-light-orange .floating-search-btn,
-        body.theme-pink .floating-search-btn {
+        body.theme-pink .youtube-icon {
             color: var(--secondary-color);
             border-color: var(--secondary-color);
         }
@@ -706,23 +706,6 @@
             box-shadow: inset 0 0 0 2px var(--secondary-color);
         }
 
-        /* AniList icon color changes */
-        body.theme-dark-blue .anilist-icon {
-            filter: brightness(0) saturate(100%) invert(14%) sepia(89%) saturate(3743%) hue-rotate(216deg) brightness(89%) contrast(101%);
-        }
-        body.theme-sky-blue .anilist-icon {
-            filter: brightness(0) saturate(100%) invert(40%) sepia(99%) saturate(1352%) hue-rotate(166deg) brightness(97%) contrast(105%);
-        }
-        body.theme-light-green .anilist-icon {
-            filter: brightness(0) saturate(100%) invert(37%) sepia(98%) saturate(748%) hue-rotate(87deg) brightness(93%) contrast(91%);
-        }
-        body.theme-light-orange .anilist-icon {
-            filter: brightness(0) saturate(100%) invert(42%) sepia(99%) saturate(2165%) hue-rotate(2deg) brightness(99%) contrast(106%);
-        }
-        body.theme-pink .anilist-icon {
-            filter: brightness(0) saturate(100%) invert(22%) sepia(98%) saturate(2090%) hue-rotate(313deg) brightness(89%) contrast(93%);
-        }
-
         /* YouTube icon styles */
         .youtube-icon {
             color: #FF0000;
@@ -743,38 +726,6 @@
         }
         body.theme-light-orange .youtube-icon {
             color: #ff9800;
-        }
-
-        /* Floating Search Button */
-        .floating-search-btn {
-            position: fixed;
-            bottom: 30px;
-            right: 30px;
-            width: 60px;
-            height: 60px;
-            background: #1A1525;
-            border: 2px solid #FF2D74;
-            border-radius: 12px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            z-index: 99;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
-            transition: all 0.3s ease;
-        }
-        body.light-mode .floating-search-btn {
-            background: #ffffff;
-            border-color: #FF2D74;
-        }
-        .floating-search-btn:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
-        }
-        .floating-search-btn i {
-            color: #FF2D74;
-            font-size: 1.5rem;
-            transition: color 0.3s;
         }
     </style>
 </head>
@@ -841,14 +792,14 @@ By the Fans, For the Fans!! ✨"
 
     <div class="features">
         <a href="https://anilist.co/user/AsatoSaizen/" target="_blank" class="feature-card clickable-card">
-            <img src="https://anilist.co/img/icons/icon.svg" class="anilist-icon" alt="AniList Logo">
-            <h3>AniList Profile</h3>
-            <p>If you're interested in my anime and manga preferences, feel free to visit my AniList profile.</p>
+            <i class="fas fa-images gallery-icon"></i>
+            <h3>Gallery</h3>
+            <p>Check out our collection of photos from past OtakuJatra events and gatherings.</p>
         </a>
         <a href="https://anilist.co/user/AsatoSaizen/stats/anime/overview" target="_blank" class="feature-card clickable-card">
             <i class="fas fa-chart-pie feature-icon"></i>
-            <h3>AL Stats</h3>
-            <p>Check out my detailed anime watching statistics and preferences on AniList</p>
+            <h3>Stats</h3>
+            <p>View statistics and insights about our community and events</p>
         </a>
         <div class="feature-card clickable-card" id="friendsCard">
             <i class="fas fa-users feature-icon"></i>
@@ -870,10 +821,6 @@ By the Fans, For the Fans!! ✨"
                 <span><i class="fab fa-instagram"></i> asatosaizen</span>
             </div>
         </div>
-        </div>
-    <!-- Floating Search Button -->
-    <div class="floating-search-btn" id="floatingSearchBtn">
-        <i class="fas fa-search"></i>
     </div>
 
     <footer>
@@ -986,12 +933,6 @@ By the Fans, For the Fans!! ✨"
             document.body.classList.add(`theme-${savedColor}`);
             document.querySelector(`.theme-color[data-theme="${savedColor}"]`).classList.add('active');
         }
-
-        // Floating Search Button
-        const floatingSearchBtn = document.getElementById('floatingSearchBtn');
-        floatingSearchBtn.addEventListener('click', () => {
-            window.open('https://youtu.be/xvFZjo5PgG0', '_blank');
-        });
     </script>
 </body>
 </html>
