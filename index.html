@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Asato Saizen - Repository Explorer</title>
+    <title>OtakuJatra - Repository Explorer</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         * {
@@ -395,6 +395,7 @@
             position: relative;
             display: block;
             text-decoration: none;
+            cursor: pointer;
         }
         .clickable-card::after {
             content: '';
@@ -727,6 +728,261 @@
         body.theme-light-orange .youtube-icon {
             color: #ff9800;
         }
+
+        /* Gallery Panel Styles */
+        .gallery-panel {
+            position: fixed;
+            top: 0;
+            right: -100%;
+            width: 100%;
+            max-width: 500px;
+            height: 100vh;
+            background: #1A1525;
+            border-left: 1px solid #2D263D;
+            padding: 2rem;
+            transition: right 0.3s ease;
+            z-index: 1000;
+            overflow-y: auto;
+        }
+        body.light-mode .gallery-panel {
+            background: #ffffff;
+            border-left: 1px solid #e0e0e0;
+        }
+        .gallery-panel.active {
+            right: 0;
+        }
+        .gallery-panel h2 {
+            color: #FF2D74;
+            margin-bottom: 1.5rem;
+            text-align: center;
+            font-size: 1.5rem;
+        }
+        .album-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+        .album-card {
+            background: #2D263D;
+            border-radius: 8px;
+            padding: 1rem;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s;
+            border: 1px solid transparent;
+        }
+        body.light-mode .album-card {
+            background: #f5f5f7;
+        }
+        .album-card:hover {
+            border-color: #FF2D74;
+            transform: translateY(-3px);
+        }
+        .album-icon {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+            color: #FF2D74;
+        }
+        .album-title {
+            font-size: 0.9rem;
+            color: #F4F0F6;
+        }
+        body.light-mode .album-title {
+            color: #333;
+        }
+        .photos-container {
+            display: none;
+            margin-top: 1rem;
+        }
+        .photos-container.active {
+            display: block;
+        }
+        .photo-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+        .photo-item {
+            position: relative;
+            border-radius: 8px;
+            overflow: hidden;
+            aspect-ratio: 1;
+        }
+        .photo-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.3s;
+        }
+        .photo-item:hover img {
+            transform: scale(1.05);
+        }
+        .back-to-albums {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            color: #FF2D74;
+            cursor: pointer;
+            margin-bottom: 1rem;
+        }
+        .back-to-albums:hover {
+            text-decoration: underline;
+        }
+
+        /* Developer Mode Styles */
+        .dev-tools {
+            margin-top: 2rem;
+            padding-top: 1rem;
+            border-top: 1px solid #2D263D;
+        }
+        body.light-mode .dev-tools {
+            border-top-color: #e0e0e0;
+        }
+        .dev-tools h3 {
+            color: #FF2D74;
+            margin-bottom: 1rem;
+            font-size: 1.1rem;
+        }
+        .upload-area {
+            border: 2px dashed #2D263D;
+            border-radius: 8px;
+            padding: 1.5rem;
+            text-align: center;
+            margin-bottom: 1rem;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        body.light-mode .upload-area {
+            border-color: #e0e0e0;
+        }
+        .upload-area:hover {
+            border-color: #FF2D74;
+            background: rgba(255, 45, 116, 0.05);
+        }
+        .upload-icon {
+            font-size: 2rem;
+            color: #FF2D74;
+            margin-bottom: 0.5rem;
+        }
+        .upload-text {
+            color: #A89DB5;
+            font-size: 0.9rem;
+        }
+        body.light-mode .upload-text {
+            color: #666;
+        }
+        .form-group {
+            margin-bottom: 1rem;
+        }
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: #C4B9CD;
+            font-size: 0.9rem;
+        }
+        body.light-mode .form-group label {
+            color: #666;
+        }
+        .form-control {
+            width: 100%;
+            padding: 0.5rem;
+            background: #2D263D;
+            border: 1px solid #2D263D;
+            border-radius: 4px;
+            color: #F4F0F6;
+            font-size: 0.9rem;
+        }
+        body.light-mode .form-control {
+            background: #f5f5f7;
+            border-color: #e0e0e0;
+            color: #333;
+        }
+        .btn {
+            padding: 0.5rem 1rem;
+            background: #FF2D74;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 0.9rem;
+            transition: all 0.3s;
+        }
+        .btn:hover {
+            background: #e91e63;
+        }
+        .btn-secondary {
+            background: #2D263D;
+        }
+        body.light-mode .btn-secondary {
+            background: #e0e0e0;
+            color: #333;
+        }
+        .btn-secondary:hover {
+            background: #3D364D;
+        }
+        body.light-mode .btn-secondary:hover {
+            background: #d0d0d0;
+        }
+
+        /* Password Modal */
+        .password-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.7);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 1100;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s;
+        }
+        .password-modal.active {
+            opacity: 1;
+            visibility: visible;
+        }
+        .password-box {
+            background: #1A1525;
+            padding: 2rem;
+            border-radius: 8px;
+            width: 90%;
+            max-width: 400px;
+            text-align: center;
+        }
+        body.light-mode .password-box {
+            background: #ffffff;
+        }
+        .password-box h3 {
+            color: #FF2D74;
+            margin-bottom: 1.5rem;
+        }
+        .password-input {
+            width: 100%;
+            padding: 0.75rem;
+            margin-bottom: 1rem;
+            background: #2D263D;
+            border: 1px solid #2D263D;
+            border-radius: 4px;
+            color: #F4F0F6;
+            font-size: 1rem;
+            text-align: center;
+        }
+        body.light-mode .password-input {
+            background: #f5f5f7;
+            border-color: #e0e0e0;
+            color: #333;
+        }
+        .password-error {
+            color: #ff5252;
+            margin-bottom: 1rem;
+            font-size: 0.9rem;
+            min-height: 1.2rem;
+        }
     </style>
 </head>
 <body>
@@ -747,7 +1003,7 @@
         <div class="menu-dropdown" id="menuDropdown">
             <a href="#">Guide</a>
             <hr>
-            <a href="#">Social Media</a>
+            <a href="#" id="devModeToggle">Developer Mode</a>
             
             <!-- Theme Options -->
             <div class="theme-options">
@@ -791,11 +1047,11 @@ By the Fans, For the Fans!! ✨"
     </div>
 
     <div class="features">
-        <a href="https://anilist.co/user/AsatoSaizen/" target="_blank" class="feature-card clickable-card">
+        <div class="feature-card clickable-card" id="galleryCard">
             <i class="fas fa-images gallery-icon"></i>
             <h3>Gallery</h3>
-            <p>Check out our collection of photos from past OtakuJatra events and gatherings.</p>
-        </a>
+            <p>Browse through our collection of photos from past OtakuJatra events and gatherings.</p>
+        </div>
         <a href="https://anilist.co/user/AsatoSaizen/stats/anime/overview" target="_blank" class="feature-card clickable-card">
             <i class="fas fa-chart-pie feature-icon"></i>
             <h3>Stats</h3>
@@ -823,11 +1079,101 @@ By the Fans, For the Fans!! ✨"
         </div>
     </div>
 
+    <!-- Gallery Panel -->
+    <div class="gallery-panel" id="galleryPanel">
+        <div class="close-panel" id="closeGalleryPanel">&times;</div>
+        <h2>Gallery</h2>
+        
+        <div class="album-grid" id="albumGrid">
+            <!-- Albums will be added here dynamically -->
+            <div class="album-card" data-album="event1">
+                <i class="fas fa-images album-icon"></i>
+                <div class="album-title">Event 2023</div>
+            </div>
+            <div class="album-card" data-album="event2">
+                <i class="fas fa-images album-icon"></i>
+                <div class="album-title">Cosplay Contest</div>
+            </div>
+            <div class="album-card" data-album="event3">
+                <i class="fas fa-images album-icon"></i>
+                <div class="album-title">Meetup 2024</div>
+            </div>
+        </div>
+        
+        <div class="photos-container" id="photosContainer">
+            <div class="back-to-albums" id="backToAlbums">
+                <i class="fas fa-arrow-left"></i> Back to Albums
+            </div>
+            <div class="photo-grid" id="photoGrid">
+                <!-- Photos will be added here dynamically -->
+            </div>
+        </div>
+        
+        <!-- Developer Tools (hidden by default) -->
+        <div class="dev-tools" id="devTools" style="display: none;">
+            <h3>Developer Tools</h3>
+            
+            <div class="upload-area" id="uploadArea">
+                <i class="fas fa-cloud-upload-alt upload-icon"></i>
+                <div class="upload-text">Drag & drop photos here or click to browse</div>
+                <input type="file" id="fileInput" multiple accept="image/*" style="display: none;">
+            </div>
+            
+            <div class="form-group">
+                <label for="albumName">Album Name</label>
+                <input type="text" id="albumName" class="form-control" placeholder="Enter album name">
+            </div>
+            
+            <div class="form-group">
+                <label for="albumDescription">Album Description</label>
+                <textarea id="albumDescription" class="form-control" rows="3" placeholder="Enter album description"></textarea>
+            </div>
+            
+            <button class="btn" id="createAlbumBtn">Create Album</button>
+            <button class="btn btn-secondary" id="uploadPhotosBtn" style="display: none;">Upload Photos</button>
+        </div>
+    </div>
+
+    <!-- Password Modal -->
+    <div class="password-modal" id="passwordModal">
+        <div class="password-box">
+            <h3>Enter Developer Password</h3>
+            <input type="password" class="password-input" id="passwordInput" placeholder="Enter password">
+            <div class="password-error" id="passwordError"></div>
+            <button class="btn" id="submitPassword">Submit</button>
+        </div>
+    </div>
+
     <footer>
         <p>© 2025 all rights reserved to Asato Saizen.</p>
     </footer>
 
     <script>
+        // Sample photo data
+        const photoData = {
+            event1: [
+                "https://via.placeholder.com/400x400/FF2D74/FFFFFF?text=Event+1",
+                "https://via.placeholder.com/400x400/FF2D74/FFFFFF?text=Event+2",
+                "https://via.placeholder.com/400x400/FF2D74/FFFFFF?text=Event+3",
+                "https://via.placeholder.com/400x400/FF2D74/FFFFFF?text=Event+4",
+                "https://via.placeholder.com/400x400/FF2D74/FFFFFF?text=Event+5",
+                "https://via.placeholder.com/400x400/FF2D74/FFFFFF?text=Event+6"
+            ],
+            event2: [
+                "https://via.placeholder.com/400x400/03a9f4/FFFFFF?text=Cosplay+1",
+                "https://via.placeholder.com/400x400/03a9f4/FFFFFF?text=Cosplay+2",
+                "https://via.placeholder.com/400x400/03a9f4/FFFFFF?text=Cosplay+3",
+                "https://via.placeholder.com/400x400/03a9f4/FFFFFF?text=Cosplay+4"
+            ],
+            event3: [
+                "https://via.placeholder.com/400x400/4caf50/FFFFFF?text=Meetup+1",
+                "https://via.placeholder.com/400x400/4caf50/FFFFFF?text=Meetup+2",
+                "https://via.placeholder.com/400x400/4caf50/FFFFFF?text=Meetup+3",
+                "https://via.placeholder.com/400x400/4caf50/FFFFFF?text=Meetup+4",
+                "https://via.placeholder.com/400x400/4caf50/FFFFFF?text=Meetup+5"
+            ]
+        };
+
         // Menu Toggle Functionality
         const menuBtn = document.getElementById('menuBtn');
         const menuDropdown = document.getElementById('menuDropdown');
@@ -866,13 +1212,203 @@ By the Fans, For the Fans!! ✨"
             overlay.classList.remove('active');
         });
         
-        // Better touch support for mobile
-        friendsCard.addEventListener('touchstart', () => {
-            friendsCard.classList.add('active');
+        // Gallery Panel Functionality
+        const galleryCard = document.getElementById('galleryCard');
+        const galleryPanel = document.getElementById('galleryPanel');
+        const closeGalleryPanel = document.getElementById('closeGalleryPanel');
+        const backToAlbums = document.getElementById('backToAlbums');
+        const albumGrid = document.getElementById('albumGrid');
+        const photosContainer = document.getElementById('photosContainer');
+        const photoGrid = document.getElementById('photoGrid');
+        
+        galleryCard.addEventListener('click', () => {
+            galleryPanel.classList.add('active');
+            overlay.classList.add('active');
         });
         
-        friendsCard.addEventListener('touchend', () => {
-            friendsCard.classList.remove('active');
+        closeGalleryPanel.addEventListener('click', () => {
+            galleryPanel.classList.remove('active');
+            overlay.classList.remove('active');
+            photosContainer.classList.remove('active');
+        });
+        
+        // Handle album clicks
+        document.querySelectorAll('.album-card').forEach(album => {
+            album.addEventListener('click', () => {
+                const albumId = album.getAttribute('data-album');
+                showPhotos(albumId);
+            });
+        });
+        
+        // Back to albums button
+        backToAlbums.addEventListener('click', () => {
+            photosContainer.classList.remove('active');
+        });
+        
+        function showPhotos(albumId) {
+            photoGrid.innerHTML = '';
+            
+            if (photoData[albumId]) {
+                photoData[albumId].forEach(photoUrl => {
+                    const photoItem = document.createElement('div');
+                    photoItem.className = 'photo-item';
+                    photoItem.innerHTML = `<img src="${photoUrl}" alt="Gallery photo">`;
+                    photoGrid.appendChild(photoItem);
+                });
+            }
+            
+            photosContainer.classList.add('active');
+        }
+
+        // Developer Mode Functionality
+        const devModeToggle = document.getElementById('devModeToggle');
+        const passwordModal = document.getElementById('passwordModal');
+        const passwordInput = document.getElementById('passwordInput');
+        const passwordError = document.getElementById('passwordError');
+        const submitPassword = document.getElementById('submitPassword');
+        const devTools = document.getElementById('devTools');
+        const uploadArea = document.getElementById('uploadArea');
+        const fileInput = document.getElementById('fileInput');
+        const albumName = document.getElementById('albumName');
+        const albumDescription = document.getElementById('albumDescription');
+        const createAlbumBtn = document.getElementById('createAlbumBtn');
+        const uploadPhotosBtn = document.getElementById('uploadPhotosBtn');
+        
+        let isDeveloperMode = false;
+        let selectedFiles = [];
+        let currentAlbumId = '';
+        
+        // Toggle developer mode
+        devModeToggle.addEventListener('click', (e) => {
+            e.preventDefault();
+            
+            if (isDeveloperMode) {
+                disableDeveloperMode();
+            } else {
+                passwordModal.classList.add('active');
+            }
+        });
+        
+        // Submit password
+        submitPassword.addEventListener('click', () => {
+            if (passwordInput.value === '865067') {
+                isDeveloperMode = true;
+                passwordModal.classList.remove('active');
+                devTools.style.display = 'block';
+                passwordError.textContent = '';
+                passwordInput.value = '';
+                
+                // Show success message
+                const originalText = devModeToggle.textContent;
+                devModeToggle.textContent = 'Developer Mode (ON)';
+                setTimeout(() => {
+                    devModeToggle.textContent = originalText;
+                }, 2000);
+            } else {
+                passwordError.textContent = 'Incorrect password. Try again.';
+            }
+        });
+        
+        function disableDeveloperMode() {
+            isDeveloperMode = false;
+            devTools.style.display = 'none';
+            
+            // Show success message
+            const originalText = devModeToggle.textContent;
+            devModeToggle.textContent = 'Developer Mode (OFF)';
+            setTimeout(() => {
+                devModeToggle.textContent = originalText;
+            }, 2000);
+        }
+        
+        // Handle file upload
+        uploadArea.addEventListener('click', () => {
+            fileInput.click();
+        });
+        
+        fileInput.addEventListener('change', (e) => {
+            selectedFiles = Array.from(e.target.files);
+            if (selectedFiles.length > 0) {
+                uploadPhotosBtn.style.display = 'block';
+            }
+        });
+        
+        // Create new album
+        createAlbumBtn.addEventListener('click', () => {
+            const name = albumName.value.trim();
+            const description = albumDescription.value.trim();
+            
+            if (name) {
+                // Generate a unique ID for the album
+                const albumId = 'album-' + Date.now();
+                
+                // Create new album in the data structure
+                photoData[albumId] = [];
+                
+                // Add the album to the UI
+                const albumCard = document.createElement('div');
+                albumCard.className = 'album-card';
+                albumCard.setAttribute('data-album', albumId);
+                albumCard.innerHTML = `
+                    <i class="fas fa-images album-icon"></i>
+                    <div class="album-title">${name}</div>
+                `;
+                albumGrid.appendChild(albumCard);
+                
+                // Set up click handler for the new album
+                albumCard.addEventListener('click', () => {
+                    currentAlbumId = albumId;
+                    showPhotos(albumId);
+                });
+                
+                // Reset form
+                albumName.value = '';
+                albumDescription.value = '';
+                
+                // Show success message
+                alert(`Album "${name}" created successfully!`);
+            } else {
+                alert('Please enter an album name');
+            }
+        });
+        
+        // Upload photos to current album
+        uploadPhotosBtn.addEventListener('click', () => {
+            if (!currentAlbumId) {
+                alert('Please select an album first');
+                return;
+            }
+            
+            if (selectedFiles.length === 0) {
+                alert('Please select photos to upload');
+                return;
+            }
+            
+            // In a real app, you would upload the files to a server here
+            // For this demo, we'll just simulate it with placeholder images
+            
+            selectedFiles.forEach(file => {
+                // Create a mock URL for the uploaded file
+                const mockUrl = URL.createObjectURL(file);
+                
+                // Add to our data structure
+                photoData[currentAlbumId].push(mockUrl);
+                
+                // Add to the UI if we're viewing this album
+                if (photosContainer.classList.contains('active')) {
+                    const photoItem = document.createElement('div');
+                    photoItem.className = 'photo-item';
+                    photoItem.innerHTML = `<img src="${mockUrl}" alt="${file.name}">`;
+                    photoGrid.appendChild(photoItem);
+                }
+            });
+            
+            // Reset
+            selectedFiles = [];
+            fileInput.value = '';
+            uploadPhotosBtn.style.display = 'none';
+            
+            alert(`${selectedFiles.length} photos uploaded to album!`);
         });
 
         // Theme Mode Toggle
