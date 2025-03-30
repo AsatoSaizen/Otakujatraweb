@@ -778,7 +778,7 @@ By the Fans, For the Fans!! ✨"
         
         <div class="album-grid" id="albumGrid">
             <!-- Albums will be added here dynamically from Imgur -->
-            <div class="loading-text">Loading albums...</div>
+            <div class="loading-albums">Loading albums...</div>
         </div>
     </div>
 
@@ -851,9 +851,7 @@ By the Fans, For the Fans!! ✨"
             galleryPanel.classList.add('active');
             overlay.classList.add('active');
             // Load albums when gallery is opened
-            if (albumGrid.children.length <= 1) { // Only has loading text
-                loadImgurAlbums();
-            }
+            loadImgurAlbums();
         });
         
         closeGalleryPanel.addEventListener('click', () => {
@@ -872,7 +870,7 @@ By the Fans, For the Fans!! ✨"
         function setupAlbumClickHandlers() {
             document.querySelectorAll('.album-card').forEach(album => {
                 album.addEventListener('click', () => {
-                    const albumId = album.getAttribute('data-album-id');
+                    const albumId = album.getAttribute('data-album');
                     const albumTitle = album.querySelector('.album-title').textContent;
                     showAlbumContent(albumId, albumTitle);
                 });
@@ -880,35 +878,11 @@ By the Fans, For the Fans!! ✨"
         }
         
         function showAlbumContent(albumId, title) {
-            photoGrid.innerHTML = '<div class="loading-text">Loading photos...</div>';
+            photoGrid.innerHTML = '<div class="loading-photos">Loading photos...</div>';
             albumContentTitle.textContent = title;
             
-            // Fetch album images from Imgur
-            fetch(`https://api.imgur.com/3/album/${albumId}/images`, {
-                headers: {
-                    'Authorization': `Client-ID ${IMGUR_CLIENT_ID}`
-                }
-            })
-            .then(response => response.json())
-            .then(data => {
-                if (data.success && data.data) {
-                    photoGrid.innerHTML = '';
-                    data.data.forEach(image => {
-                        const photoItem = document.createElement('div');
-                        photoItem.className = 'photo-item';
-                        photoItem.innerHTML = `
-                            <img src="${image.link}" alt="Gallery photo">
-                        `;
-                        photoGrid.appendChild(photoItem);
-                    });
-                } else {
-                    photoGrid.innerHTML = '<div class="error-text">Failed to load photos</div>';
-                }
-            })
-            .catch(error => {
-                console.error('Error loading album photos:', error);
-                photoGrid.innerHTML = '<div class="error-text">Error loading photos</div>';
-            });
+            // Load photos from Imgur album
+            loadImgurAlbumPhotos(albumId);
             
             albumContentPanel.classList.add('active');
             overlay.classList.add('active');
@@ -960,61 +934,89 @@ By the Fans, For the Fans!! ✨"
             themeModeText.textContent = 'Light Mode';
         }
 
-        // Load Imgur albums
-        function loadImgurAlbums() {
-            albumGrid.innerHTML = '<div class="loading-text">Loading albums...</div>';
-            
-            // First get account details to get the user ID
-            fetch(`https://api.imgur.com/3/account/${IMGUR_USERNAME}`, {
-                headers: {
-                    'Authorization': `Client-ID ${IMGUR_CLIENT_ID}`
-                }
-            })
-            .then(response => response.json())
-            .then(accountData => {
-                if (accountData.success && accountData.data) {
-                    const userId = accountData.data.id;
-                    // Now get the albums for this user
-                    return fetch(`https://api.imgur.com/3/account/${userId}/albums`, {
-                        headers: {
-                            'Authorization': `Client-ID ${IMGUR_CLIENT_ID}`
-                        }
-                    });
-                } else {
-                    throw new Error('Failed to get account info');
-                }
-            })
-            .then(response => response.json())
-            .then(albumsData => {
-                if (albumsData.success && albumsData.data) {
-                    albumGrid.innerHTML = '';
-                    
-                    if (albumsData.data.length === 0) {
-                        albumGrid.innerHTML = '<div class="no-albums-text">No albums found</div>';
-                        return;
+        // Imgur API Functions
+        async function loadImgurAlbums() {
+            try {
+                // First get the account ID from username
+                const accountResponse = await fetch(`https://api.imgur.com/3/account/${IMGUR_USERNAME}`, {
+                    headers: {
+                        'Authorization': `Client-ID ${IMGUR_CLIENT_ID}`
                     }
-                    
-                    albumsData.data.forEach(album => {
-                        const albumCard = document.createElement('div');
-                        albumCard.className = 'album-card';
-                        albumCard.setAttribute('data-album-id', album.id);
-                        albumCard.innerHTML = `
-                            <i class="fas fa-images album-icon"></i>
-                            <div class="album-title">${album.title || 'Untitled Album'}</div>
-                        `;
-                        albumGrid.appendChild(albumCard);
-                    });
-                    
-                    // Setup click handlers for the new album cards
-                    setupAlbumClickHandlers();
-                } else {
-                    albumGrid.innerHTML = '<div class="error-text">Failed to load albums</div>';
+                });
+                
+                const accountData = await accountResponse.json();
+                if (!accountData.success) {
+                    throw new Error('Failed to fetch account data');
                 }
-            })
-            .catch(error => {
-                console.error('Error loading albums:', error);
-                albumGrid.innerHTML = '<div class="error-text">Error loading albums</div>';
-            });
+                
+                const accountId = accountData.data.id;
+                
+                // Then get all albums for this account
+                const albumsResponse = await fetch(`https://api.imgur.com/3/account/${accountId}/albums/`, {
+                    headers: {
+                        'Authorization': `Client-ID ${IMGUR_CLIENT_ID}`
+                    }
+                });
+                
+                const albumsData = await albumsResponse.json();
+                if (!albumsData.success) {
+                    throw new Error('Failed to fetch albums');
+                }
+                
+                // Clear loading message
+                albumGrid.innerHTML = '';
+                
+                // Add albums to the grid
+                albumsData.data.forEach(album => {
+                    const albumCard = document.createElement('div');
+                    albumCard.className = 'album-card';
+                    albumCard.setAttribute('data-album', album.id);
+                    albumCard.innerHTML = `
+                        <i class="fas fa-images album-icon"></i>
+                        <div class="album-title">${album.title || 'Untitled Album'}</div>
+                    `;
+                    albumGrid.appendChild(albumCard);
+                });
+                
+                // Set up click handlers for the new albums
+                setupAlbumClickHandlers();
+                
+            } catch (error) {
+                console.error('Error loading Imgur albums:', error);
+                albumGrid.innerHTML = '<div class="error-loading">Failed to load albums. Please try again later.</div>';
+            }
+        }
+        
+        async function loadImgurAlbumPhotos(albumId) {
+            try {
+                const response = await fetch(`https://api.imgur.com/3/album/${albumId}`, {
+                    headers: {
+                        'Authorization': `Client-ID ${IMGUR_CLIENT_ID}`
+                    }
+                });
+                
+                const data = await response.json();
+                if (!data.success) {
+                    throw new Error('Failed to fetch album photos');
+                }
+                
+                // Clear loading message
+                photoGrid.innerHTML = '';
+                
+                // Add photos to the grid
+                data.data.images.forEach(image => {
+                    const photoItem = document.createElement('div');
+                    photoItem.className = 'photo-item';
+                    photoItem.innerHTML = `
+                        <img src="${image.link}" alt="Gallery photo" loading="lazy">
+                    `;
+                    photoGrid.appendChild(photoItem);
+                });
+                
+            } catch (error) {
+                console.error('Error loading album photos:', error);
+                photoGrid.innerHTML = '<div class="error-loading">Failed to load photos. Please try again later.</div>';
+            }
         }
     </script>
 </body>
