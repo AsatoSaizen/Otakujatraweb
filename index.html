@@ -656,9 +656,12 @@
         }
         .photo-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+            grid-template-columns: repeat(2, 1fr);
             gap: 1rem;
             margin-top: 1rem;
+        }
+        .photo-grid.grid-4 {
+            grid-template-columns: repeat(4, 1fr);
         }
         .photo-item {
             position: relative;
@@ -705,6 +708,12 @@
             z-index: 1002;
             box-shadow: 0 4px 12px rgba(3, 169, 244, 0.3);
             transition: all 0.3s;
+            opacity: 0;
+            visibility: hidden;
+        }
+        .album-content-panel.active ~ .grid-toggle {
+            opacity: 1;
+            visibility: visible;
         }
         .grid-toggle:hover {
             transform: scale(1.1);
@@ -1044,29 +1053,27 @@ By the Fans, For the Fans!! ✨"
 
         // Grid Toggle Functionality
         const gridToggle = document.getElementById('gridToggle');
-        let isSquareGrid = true;
+        let currentGridColumns = 2; // Default is 2 columns
         
         gridToggle.addEventListener('click', () => {
-            isSquareGrid = !isSquareGrid;
+            // Toggle between 2 and 4 columns
+            currentGridColumns = currentGridColumns === 2 ? 4 : 2;
             updatePhotoGridLayout();
             
             // Animate the button
             gridToggle.style.transform = 'scale(0.9)';
             setTimeout(() => {
                 gridToggle.style.transform = 'scale(1)';
-                gridToggle.innerHTML = isSquareGrid ? '<i class="fas fa-th"></i>' : '<i class="fas fa-bars"></i>';
+                gridToggle.innerHTML = currentGridColumns === 2 ? '<i class="fas fa-th-large"></i>' : '<i class="fas fa-th"></i>';
             }, 200);
         });
         
         function updatePhotoGridLayout() {
-            const photoItems = document.querySelectorAll('.photo-item');
-            photoItems.forEach(item => {
-                if (isSquareGrid) {
-                    item.style.aspectRatio = '1/1';
-                } else {
-                    item.style.aspectRatio = 'auto';
-                }
-            });
+            if (currentGridColumns === 2) {
+                photoGrid.classList.remove('grid-4');
+            } else {
+                photoGrid.classList.add('grid-4');
+            }
         }
 
         // Image Viewer Functionality
