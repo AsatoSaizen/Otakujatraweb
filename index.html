@@ -10,7 +10,7 @@
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Rickoto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
             -webkit-tap-highlight-color: transparent;
         }
         body {
@@ -63,7 +63,6 @@
             color: #FF2D74;
         }
 
-        /* Menu Button Styles */
         .menu-btn {
             width: 30px;
             height: 30px;
@@ -104,7 +103,6 @@
         .menu-btn__burger::after {
             transform: translateY(8px);
         }
-        /* Menu Button Animation */
         .menu-btn.open .menu-btn__burger {
             transform: translateX(-20px);
             background: transparent;
@@ -118,7 +116,6 @@
             background: #FF2D74;
         }
 
-        /* Menu Dropdown */
         .menu-dropdown {
             position: absolute;
             top: 70px;
@@ -166,7 +163,6 @@
             background: #e0e0e0;
         }
 
-        /* Theme options */
         .theme-options {
             margin: 0.5rem 0;
         }
@@ -247,7 +243,6 @@
             color: #666;
         }
 
-        /* Center logo with text */
         .big-center-logo {
             display: flex;
             flex-direction: column;
@@ -290,7 +285,6 @@
             color: #333;
         }
 
-        /* Social Buttons Container */
         .social-buttons {
             display: flex;
             gap: 15px;
@@ -299,7 +293,6 @@
             justify-content: center;
         }
 
-        /* Instagram Button */
         .instagram-btn {
             display: inline-flex;
             align-items: center;
@@ -318,7 +311,6 @@
             box-shadow: 0 4px 12px rgba(225, 48, 108, 0.3);
         }
 
-        /* Discord Button */
         .discord-btn {
             display: inline-flex;
             align-items: center;
@@ -337,7 +329,6 @@
             box-shadow: 0 4px 12px rgba(88, 101, 242, 0.3);
         }
 
-        /* Features section */
         .features {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
@@ -410,7 +401,6 @@
             box-shadow: inset 0 0 0 2px #FF2D74;
         }
         
-        /* Profile Panel - Responsive */
         .profile-panel {
             position: fixed;
             top: 0;
@@ -539,6 +529,124 @@
             opacity: 1;
             visibility: visible;
         }
+        
+        /* Gallery Panel Styles */
+        .gallery-panel {
+            position: fixed;
+            top: 0;
+            right: -100%;
+            width: 100%;
+            max-width: 800px;
+            height: 100vh;
+            background: #1A1525;
+            border-left: 1px solid #2D263D;
+            padding: 2rem;
+            transition: right 0.3s ease;
+            z-index: 1000;
+            overflow-y: auto;
+        }
+        body.light-mode .gallery-panel {
+            background: #ffffff;
+            border-left: 1px solid #e0e0e0;
+        }
+        .gallery-panel.active {
+            right: 0;
+        }
+        .gallery-panel h2 {
+            color: #FF2D74;
+            margin-bottom: 1.5rem;
+            text-align: center;
+            font-size: 1.5rem;
+            transition: color 0.3s;
+        }
+        .gallery-content {
+            display: grid;
+            gap: 1rem;
+            padding: 1rem;
+        }
+        .gallery-image {
+            width: 100%;
+            border-radius: 8px;
+            border: 2px solid #2D263D;
+            transition: transform 0.3s ease;
+        }
+        body.light-mode .gallery-image {
+            border-color: #e0e0e0;
+        }
+        .gallery-image:hover {
+            transform: scale(1.02);
+        }
+        
+        /* Saizen 1 File Section Inside Gallery */
+        .file-section {
+            margin: 2rem 0;
+            padding: 1rem;
+            background: #2D263D;
+            border-radius: 12px;
+        }
+        body.light-mode .file-section {
+            background: #f5f5f7;
+        }
+        
+        .file-card {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            padding: 1rem;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            text-decoration: none;
+            color: #E6E1E6;
+        }
+        
+        body.light-mode .file-card {
+            color: #333;
+        }
+        
+        .file-card:hover {
+            background: rgba(255, 45, 116, 0.1);
+        }
+        
+        .file-icon {
+            font-size: 2rem;
+            color: #FF2D74;
+        }
+        
+        .file-info h3 {
+            margin-bottom: 0.3rem;
+        }
+        
+        .file-info p {
+            color: #A89DB5;
+            font-size: 0.9rem;
+        }
+        
+        body.light-mode .file-info p {
+            color: #666;
+        }
+        
+        /* Image Grid Styles */
+        .image-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+        
+        .grid-image {
+            width: 100%;
+            height: 150px;
+            object-fit: cover;
+            border-radius: 8px;
+            border: 2px solid #2D263D;
+            transition: transform 0.3s ease;
+        }
+        
+        .grid-image:hover {
+            transform: scale(1.05);
+        }
+        
         footer {
             text-align: center;
             padding: 30px 5%;
@@ -558,7 +666,6 @@
             color: #999;
         }
         
-        /* Touch improvements */
         @media (hover: none) {
             .feature-card:hover {
                 transform: none;
@@ -584,9 +691,26 @@
                 border-color: #FF2D74;
                 transform: scale(0.98);
             }
+            .gallery-image:hover {
+                transform: none;
+            }
+            .gallery-image:active {
+                transform: scale(1.02);
+            }
+            .file-card:hover {
+                background: transparent;
+            }
+            .file-card:active {
+                background: rgba(255, 45, 116, 0.1);
+            }
+            .grid-image:hover {
+                transform: none;
+            }
+            .grid-image:active {
+                transform: scale(1.05);
+            }
         }
 
-        /* Theme color classes */
         body.theme-dark-blue {
             --primary-color: #1a237e;
             --secondary-color: #0d47a1;
@@ -608,7 +732,6 @@
             --secondary-color: #e91e63;
         }
 
-        /* Apply theme colors to specific elements */
         body.theme-dark-blue .logo-text {
             color: #0d47a1;
         }
@@ -650,6 +773,16 @@
         body.theme-light-green .profile-panel h2,
         body.theme-light-orange .profile-panel h2,
         body.theme-pink .profile-panel h2,
+        body.theme-dark-blue .gallery-panel h2,
+        body.theme-sky-blue .gallery-panel h2,
+        body.theme-light-green .gallery-panel h2,
+        body.theme-light-orange .gallery-panel h2,
+        body.theme-pink .gallery-panel h2,
+        body.theme-dark-blue .file-icon,
+        body.theme-sky-blue .file-icon,
+        body.theme-light-green .file-icon,
+        body.theme-light-orange .file-icon,
+        body.theme-pink .file-icon,
         body.theme-dark-blue .youtube-icon,
         body.theme-sky-blue .youtube-icon,
         body.theme-light-green .youtube-icon,
@@ -683,7 +816,12 @@
         body.theme-sky-blue .close-panel:hover,
         body.theme-light-green .close-panel:hover,
         body.theme-light-orange .close-panel:hover,
-        body.theme-pink .close-panel:hover {
+        body.theme-pink .close-panel:hover,
+        body.theme-dark-blue #closeGalleryPanel:hover,
+        body.theme-sky-blue #closeGalleryPanel:hover,
+        body.theme-light-green #closeGalleryPanel:hover,
+        body.theme-light-orange #closeGalleryPanel:hover,
+        body.theme-pink #closeGalleryPanel:hover {
             color: var(--secondary-color);
         }
 
@@ -701,12 +839,16 @@
         body.theme-sky-blue .clickable-card:hover::after,
         body.theme-light-green .clickable-card:hover::after,
         body.theme-light-orange .clickable-card:hover::after,
-        body.theme-pink .clickable-card:hover::after {
+        body.theme-pink .clickable-card:hover::after,
+        body.theme-dark-blue .file-card:hover,
+        body.theme-sky-blue .file-card:hover,
+        body.theme-light-green .file-card:hover,
+        body.theme-light-orange .file-card:hover,
+        body.theme-pink .file-card:hover {
             border-color: var(--secondary-color);
             box-shadow: inset 0 0 0 2px var(--secondary-color);
         }
 
-        /* YouTube icon styles */
         .youtube-icon {
             color: #FF0000;
             margin-right: 5px;
@@ -738,18 +880,15 @@
             </a>
         </div>
         
-        <!-- Animated Menu Button -->
         <div class="menu-btn" id="menuBtn">
             <div class="menu-btn__burger"></div>
         </div>
         
-        <!-- Menu Dropdown -->
         <div class="menu-dropdown" id="menuDropdown">
             <a href="#">Guide</a>
             <hr>
             <a href="#">Social Media</a>
             
-            <!-- Theme Options -->
             <div class="theme-options">
                 <h4>Theme Color</h4>
                 <div class="theme-colors">
@@ -791,11 +930,11 @@ By the Fans, For the Fans!! ✨"
     </div>
 
     <div class="features">
-        <a href="https://anilist.co/user/AsatoSaizen/" target="_blank" class="feature-card clickable-card">
+        <div class="feature-card clickable-card" id="galleryCard">
             <i class="fas fa-images gallery-icon"></i>
             <h3>Gallery</h3>
             <p>Check out our collection of photos from past OtakuJatra events and gatherings.</p>
-        </a>
+        </div>
         <a href="https://anilist.co/user/AsatoSaizen/stats/anime/overview" target="_blank" class="feature-card clickable-card">
             <i class="fas fa-chart-pie feature-icon"></i>
             <h3>Stats</h3>
@@ -808,7 +947,6 @@ By the Fans, For the Fans!! ✨"
         </div>
     </div>
 
-    <!-- Profile Panel -->
     <div class="overlay" id="overlay"></div>
     <div class="profile-panel" id="profilePanel">
         <div class="close-panel" id="closePanel">&times;</div>
@@ -823,116 +961,134 @@ By the Fans, For the Fans!! ✨"
         </div>
     </div>
 
+    <div class="gallery-panel" id="galleryPanel">
+        <div class="close-panel" id="closeGalleryPanel">&times;</div>
+        <h2>Oj album test</h2>
+        
+        <div class="gallery-content">
+            <!-- All images and cards from this section have been removed -->
+        </div>
+    </div>
+
     <footer>
         <p>© 2025 all rights reserved to Asato Saizen.</p>
     </footer>
 
     <script>
-        // Menu Toggle Functionality
-        const menuBtn = document.getElementById('menuBtn');
-        const menuDropdown = document.getElementById('menuDropdown');
-        
-        menuBtn.addEventListener('click', () => {
-            menuBtn.classList.toggle('open');
-            menuDropdown.classList.toggle('active');
-        });
-        
-        // Close menu when clicking outside
-        document.addEventListener('click', (e) => {
-            if (!menuBtn.contains(e.target) && !menuDropdown.contains(e.target)) {
-                menuBtn.classList.remove('open');
-                menuDropdown.classList.remove('active');
-            }
-        });
-
-        // Profile Panel Functionality
-        const friendsCard = document.getElementById('friendsCard');
-        const profilePanel = document.getElementById('profilePanel');
-        const closePanel = document.getElementById('closePanel');
-        const overlay = document.getElementById('overlay');
-        
-        friendsCard.addEventListener('click', () => {
-            profilePanel.classList.add('active');
-            overlay.classList.add('active');
-        });
-        
-        closePanel.addEventListener('click', () => {
-            profilePanel.classList.remove('active');
-            overlay.classList.remove('active');
-        });
-        
-        overlay.addEventListener('click', () => {
-            profilePanel.classList.remove('active');
-            overlay.classList.remove('active');
-        });
-        
-        // Better touch support for mobile
-        friendsCard.addEventListener('touchstart', () => {
-            friendsCard.classList.add('active');
-        });
-        
-        friendsCard.addEventListener('touchend', () => {
-            friendsCard.classList.remove('active');
-        });
-
-        // Theme Mode Toggle
-        const themeMode = document.getElementById('themeMode');
-        const themeModeText = document.querySelector('.theme-mode-text');
-        
-        themeMode.addEventListener('click', () => {
-            document.body.classList.toggle('light-mode');
+        document.addEventListener('DOMContentLoaded', function() {
+            // Menu Toggle
+            const menuBtn = document.getElementById('menuBtn');
+            const menuDropdown = document.getElementById('menuDropdown');
             
-            if (document.body.classList.contains('light-mode')) {
-                themeModeText.textContent = 'Light Mode';
-            } else {
-                themeModeText.textContent = 'Dark Mode';
-            }
+            menuBtn.addEventListener('click', function(e) {
+                e.stopPropagation();
+                menuBtn.classList.toggle('open');
+                menuDropdown.classList.toggle('active');
+            });
             
-            // Save preference to localStorage
-            localStorage.setItem('themeMode', document.body.classList.contains('light-mode') ? 'light' : 'dark');
-        });
+            document.addEventListener('click', function(e) {
+                if (!menuBtn.contains(e.target) && !menuDropdown.contains(e.target)) {
+                    menuBtn.classList.remove('open');
+                    menuDropdown.classList.remove('active');
+                }
+            });
 
-        // Check for saved theme preference
-        if (localStorage.getItem('themeMode') === 'light') {
-            document.body.classList.add('light-mode');
-            themeModeText.textContent = 'Light Mode';
-        }
+            // Profile Panel
+            const friendsCard = document.getElementById('friendsCard');
+            const profilePanel = document.getElementById('profilePanel');
+            const closePanel = document.getElementById('closePanel');
+            
+            // Gallery Panel
+            const galleryCard = document.getElementById('galleryCard');
+            const galleryPanel = document.getElementById('galleryPanel');
+            const closeGalleryPanel = document.getElementById('closeGalleryPanel');
+            const overlay = document.getElementById('overlay');
+            
+            // Open Profile Panel
+            friendsCard.addEventListener('click', function() {
+                profilePanel.classList.add('active');
+                overlay.classList.add('active');
+            });
+            
+            // Open Gallery Panel
+            galleryCard.addEventListener('click', function() {
+                galleryPanel.classList.add('active');
+                overlay.classList.add('active');
+            });
+            
+            // Close Profile Panel
+            closePanel.addEventListener('click', function() {
+                profilePanel.classList.remove('active');
+                overlay.classList.remove('active');
+            });
+            
+            // Close Gallery Panel
+            closeGalleryPanel.addEventListener('click', function() {
+                galleryPanel.classList.remove('active');
+                overlay.classList.remove('active');
+            });
+            
+            // Close Both Panels with Overlay
+            overlay.addEventListener('click', function() {
+                profilePanel.classList.remove('active');
+                galleryPanel.classList.remove('active');
+                overlay.classList.remove('active');
+            });
 
-        // Theme Color Selection
-        const themeColors = document.querySelectorAll('.theme-color');
-        
-        themeColors.forEach(color => {
-            color.addEventListener('click', () => {
-                // Remove all theme classes
-                document.body.classList.remove(
-                    'theme-dark-blue',
-                    'theme-sky-blue',
-                    'theme-light-green',
-                    'theme-light-orange',
-                    'theme-pink'
-                );
+            // Theme Mode Toggle
+            const themeMode = document.getElementById('themeMode');
+            const themeModeText = document.querySelector('.theme-mode-text');
+            
+            themeMode.addEventListener('click', function() {
+                document.body.classList.toggle('light-mode');
                 
-                // Add selected theme class
-                const theme = color.getAttribute('data-theme');
-                if (theme) {
-                    document.body.classList.add(`theme-${theme}`);
+                if (document.body.classList.contains('light-mode')) {
+                    themeModeText.textContent = 'Light Mode';
+                } else {
+                    themeModeText.textContent = 'Dark Mode';
                 }
                 
-                // Update active state
-                themeColors.forEach(c => c.classList.remove('active'));
-                color.classList.add('active');
-                
-                // Save preference to localStorage
-                localStorage.setItem('themeColor', theme || '');
+                localStorage.setItem('themeMode', document.body.classList.contains('light-mode') ? 'light' : 'dark');
             });
-        });
 
-        // Check for saved color preference
-        const savedColor = localStorage.getItem('themeColor');
-        if (savedColor) {
-            document.body.classList.add(`theme-${savedColor}`);
-            document.querySelector(`.theme-color[data-theme="${savedColor}"]`).classList.add('active');
-        }
+            // Load saved theme preference
+            if (localStorage.getItem('themeMode') === 'light') {
+                document.body.classList.add('light-mode');
+                themeModeText.textContent = 'Light Mode';
+            }
+
+            // Theme Color Selection
+            const themeColors = document.querySelectorAll('.theme-color');
+            
+            themeColors.forEach(color => {
+                color.addEventListener('click', function() {
+                    document.body.classList.remove(
+                        'theme-dark-blue',
+                        'theme-sky-blue',
+                        'theme-light-green',
+                        'theme-light-orange',
+                        'theme-pink'
+                    );
+                    
+                    const theme = color.getAttribute('data-theme');
+                    if (theme) {
+                        document.body.classList.add(`theme-${theme}`);
+                    }
+                    
+                    themeColors.forEach(c => c.classList.remove('active'));
+                    color.classList.add('active');
+                    
+                    localStorage.setItem('themeColor', theme || '');
+                });
+            });
+
+            // Load saved color preference
+            const savedColor = localStorage.getItem('themeColor');
+            if (savedColor) {
+                document.body.classList.add(`theme-${savedColor}`);
+                document.querySelector(`.theme-color[data-theme="${savedColor}"]`).classList.add('active');
+            }
+        });
     </script>
 </body>
 </html>
