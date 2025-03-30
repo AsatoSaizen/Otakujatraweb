@@ -60,7 +60,7 @@
             color: #666;
         }
         .nav-icon:hover {
-            color: #FF2D74;
+            color: #03a9f4;
         }
 
         /* Menu Button Styles */
@@ -111,11 +111,11 @@
         }
         .menu-btn.open .menu-btn__burger::before {
             transform: rotate(45deg) translate(15px, -15px);
-            background: #FF2D74;
+            background: #03a9f4;
         }
         .menu-btn.open .menu-btn__burger::after {
             transform: rotate(-45deg) translate(15px, 15px);
-            background: #FF2D74;
+            background: #03a9f4;
         }
 
         /* Menu Dropdown */
@@ -154,7 +154,7 @@
             color: #666;
         }
         .menu-dropdown a:hover {
-            color: #FF2D74;
+            color: #03a9f4;
         }
         .menu-dropdown hr {
             border: none;
@@ -271,7 +271,7 @@
             transform: scale(1.05);
         }
         .logo-text {
-            color: #e91e63;
+            color: #03a9f4;
             font-size: 2rem;
             font-weight: 600;
             margin-top: 1rem;
@@ -361,18 +361,18 @@
         .feature-card:hover {
             transform: translateY(-8px);
             box-shadow: 0 12px 24px rgba(0, 0, 0, 0.3);
-            border-color: #FF2D74;
+            border-color: #03a9f4;
         }
         .feature-icon {
             font-size: 1.8rem;
             margin-bottom: 20px;
-            color: #FF2D74;
+            color: #03a9f4;
             transition: color 0.3s;
         }
         .gallery-icon {
             font-size: 2rem;
             margin-bottom: 15px;
-            color: #FF2D74;
+            color: #03a9f4;
             transition: color 0.3s;
         }
         .feature-card h3 {
@@ -408,7 +408,7 @@
             transition: all 0.3s ease;
         }
         .clickable-card:hover::after {
-            box-shadow: inset 0 0 0 2px #FF2D74;
+            box-shadow: inset 0 0 0 2px #03a9f4;
         }
         
         /* Profile Panel - Responsive */
@@ -440,7 +440,7 @@
             right: 0;
         }
         .profile-panel h2 {
-            color: #FF2D74;
+            color: #03a9f4;
             margin-bottom: 1.5rem;
             text-align: center;
             font-size: 1.5rem;
@@ -462,7 +462,7 @@
             background: #f5f5f7;
         }
         .profile-card:hover {
-            border-color: #FF2D74;
+            border-color: #03a9f4;
             transform: translateY(-3px);
         }
         .profile-card:active {
@@ -473,7 +473,7 @@
             height: 60px;
             border-radius: 50%;
             object-fit: cover;
-            border: 2px solid #FF2D74;
+            border: 2px solid #03a9f4;
             transition: border-color 0.3s;
         }
         .profile-info {
@@ -498,7 +498,7 @@
             color: #666;
         }
         .profile-info i {
-            color: #FF2D74;
+            color: #03a9f4;
             font-size: 1rem;
             transition: color 0.3s;
         }
@@ -521,8 +521,8 @@
             color: #666;
         }
         .close-panel:hover {
-            color: #FF2D74;
-            background: rgba(255, 45, 116, 0.1);
+            color: #03a9f4;
+            background: rgba(3, 169, 244, 0.1);
         }
         .overlay {
             position: fixed;
@@ -572,7 +572,7 @@
             .feature-card:active {
                 transform: translateY(-8px);
                 box-shadow: 0 12px 24px rgba(0, 0, 0, 0.3);
-                border-color: #FF2D74;
+                border-color: #03a9f4;
             }
             .clickable-card:hover::after {
                 box-shadow: none;
@@ -582,129 +582,9 @@
                 transform: none;
             }
             .profile-card:active {
-                border-color: #FF2D74;
+                border-color: #03a9f4;
                 transform: scale(0.98);
             }
-        }
-
-        /* Theme color classes */
-        body.theme-dark-blue {
-            --primary-color: #1a237e;
-            --secondary-color: #0d47a1;
-        }
-        body.theme-sky-blue {
-            --primary-color: #0288d1;
-            --secondary-color: #03a9f4;
-        }
-        body.theme-light-green {
-            --primary-color: #2e7d32;
-            --secondary-color: #4caf50;
-        }
-        body.theme-light-orange {
-            --primary-color: #e65100;
-            --secondary-color: #ff9800;
-        }
-        body.theme-pink {
-            --primary-color: #ad1457;
-            --secondary-color: #e91e63;
-        }
-
-        /* Apply theme colors to specific elements */
-        body.theme-dark-blue .logo-text {
-            color: #0d47a1;
-        }
-        body.theme-sky-blue .logo-text {
-            color: #03a9f4;
-        }
-        body.theme-light-green .logo-text {
-            color: #4caf50;
-        }
-        body.theme-light-orange .logo-text {
-            color: #ff9800;
-        }
-        body.theme-pink .logo-text {
-            color: #e91e63;
-        }
-
-        body.theme-dark-blue .feature-icon,
-        body.theme-sky-blue .feature-icon,
-        body.theme-light-green .feature-icon,
-        body.theme-light-orange .feature-icon,
-        body.theme-pink .feature-icon,
-        body.theme-dark-blue .gallery-icon,
-        body.theme-sky-blue .gallery-icon,
-        body.theme-light-green .gallery-icon,
-        body.theme-light-orange .gallery-icon,
-        body.theme-pink .gallery-icon,
-        body.theme-dark-blue .profile-info i,
-        body.theme-sky-blue .profile-info i,
-        body.theme-light-green .profile-info i,
-        body.theme-light-orange .profile-info i,
-        body.theme-pink .profile-info i,
-        body.theme-dark-blue .profile-card img,
-        body.theme-sky-blue .profile-card img,
-        body.theme-light-green .profile-card img,
-        body.theme-light-orange .profile-card img,
-        body.theme-pink .profile-card img,
-        body.theme-dark-blue .profile-panel h2,
-        body.theme-sky-blue .profile-panel h2,
-        body.theme-light-green .profile-panel h2,
-        body.theme-light-orange .profile-panel h2,
-        body.theme-pink .profile-panel h2,
-        body.theme-dark-blue .youtube-icon,
-        body.theme-sky-blue .youtube-icon,
-        body.theme-light-green .youtube-icon,
-        body.theme-light-orange .youtube-icon,
-        body.theme-pink .youtube-icon {
-            color: var(--secondary-color);
-            border-color: var(--secondary-color);
-        }
-
-        body.theme-dark-blue .menu-btn.open .menu-btn__burger::before,
-        body.theme-dark-blue .menu-btn.open .menu-btn__burger::after,
-        body.theme-sky-blue .menu-btn.open .menu-btn__burger::before,
-        body.theme-sky-blue .menu-btn.open .menu-btn__burger::after,
-        body.theme-light-green .menu-btn.open .menu-btn__burger::before,
-        body.theme-light-green .menu-btn.open .menu-btn__burger::after,
-        body.theme-light-orange .menu-btn.open .menu-btn__burger::before,
-        body.theme-light-orange .menu-btn.open .menu-btn__burger::after,
-        body.theme-pink .menu-btn.open .menu-btn__burger::before,
-        body.theme-pink .menu-btn.open .menu-btn__burger::after,
-        body.theme-dark-blue .nav-icon:hover,
-        body.theme-sky-blue .nav-icon:hover,
-        body.theme-light-green .nav-icon:hover,
-        body.theme-light-orange .nav-icon:hover,
-        body.theme-pink .nav-icon:hover,
-        body.theme-dark-blue .menu-dropdown a:hover,
-        body.theme-sky-blue .menu-dropdown a:hover,
-        body.theme-light-green .menu-dropdown a:hover,
-        body.theme-light-orange .menu-dropdown a:hover,
-        body.theme-pink .menu-dropdown a:hover,
-        body.theme-dark-blue .close-panel:hover,
-        body.theme-sky-blue .close-panel:hover,
-        body.theme-light-green .close-panel:hover,
-        body.theme-light-orange .close-panel:hover,
-        body.theme-pink .close-panel:hover {
-            color: var(--secondary-color);
-        }
-
-        body.theme-dark-blue .feature-card:hover,
-        body.theme-sky-blue .feature-card:hover,
-        body.theme-light-green .feature-card:hover,
-        body.theme-light-orange .feature-card:hover,
-        body.theme-pink .feature-card:hover,
-        body.theme-dark-blue .profile-card:hover,
-        body.theme-sky-blue .profile-card:hover,
-        body.theme-light-green .profile-card:hover,
-        body.theme-light-orange .profile-card:hover,
-        body.theme-pink .profile-card:hover,
-        body.theme-dark-blue .clickable-card:hover::after,
-        body.theme-sky-blue .clickable-card:hover::after,
-        body.theme-light-green .clickable-card:hover::after,
-        body.theme-light-orange .clickable-card:hover::after,
-        body.theme-pink .clickable-card:hover::after {
-            border-color: var(--secondary-color);
-            box-shadow: inset 0 0 0 2px var(--secondary-color);
         }
 
         /* YouTube icon styles */
@@ -752,7 +632,7 @@
             right: 0;
         }
         .gallery-panel h2 {
-            color: #FF2D74;
+            color: #03a9f4;
             margin-bottom: 1.5rem;
             text-align: center;
             font-size: 1.5rem;
@@ -777,13 +657,13 @@
             background: #f5f5f7;
         }
         .album-card:hover {
-            border-color: #FF2D74;
+            border-color: #03a9f4;
             transform: translateY(-3px);
         }
         .album-icon {
             font-size: 2.5rem;
             margin-bottom: 0.5rem;
-            color: #FF2D74;
+            color: #03a9f4;
         }
         .album-title {
             font-size: 0.9rem;
@@ -824,7 +704,7 @@
             display: flex;
             align-items: center;
             gap: 5px;
-            color: #FF2D74;
+            color: #03a9f4;
             cursor: pointer;
             margin-bottom: 1rem;
         }
@@ -842,7 +722,7 @@
             border-top-color: #e0e0e0;
         }
         .dev-tools h3 {
-            color: #FF2D74;
+            color: #03a9f4;
             margin-bottom: 1rem;
             font-size: 1.1rem;
         }
@@ -859,12 +739,12 @@
             border-color: #e0e0e0;
         }
         .upload-area:hover {
-            border-color: #FF2D74;
-            background: rgba(255, 45, 116, 0.05);
+            border-color: #03a9f4;
+            background: rgba(3, 169, 244, 0.05);
         }
         .upload-icon {
             font-size: 2rem;
-            color: #FF2D74;
+            color: #03a9f4;
             margin-bottom: 0.5rem;
         }
         .upload-text {
@@ -902,7 +782,7 @@
         }
         .btn {
             padding: 0.5rem 1rem;
-            background: #FF2D74;
+            background: #03a9f4;
             color: white;
             border: none;
             border-radius: 4px;
@@ -911,7 +791,7 @@
             transition: all 0.3s;
         }
         .btn:hover {
-            background: #e91e63;
+            background: #0288d1;
         }
         .btn-secondary {
             background: #2D263D;
@@ -959,7 +839,7 @@
             background: #ffffff;
         }
         .password-box h3 {
-            color: #FF2D74;
+            color: #03a9f4;
             margin-bottom: 1.5rem;
         }
         .password-input {
@@ -1052,15 +932,6 @@
             
             <!-- Theme Options -->
             <div class="theme-options">
-                <h4>Theme Color</h4>
-                <div class="theme-colors">
-                    <div class="theme-color" style="background: #1a237e;" data-theme="dark-blue" title="Dark Blue"></div>
-                    <div class="theme-color" style="background: #0288d1;" data-theme="sky-blue" title="Sky Blue"></div>
-                    <div class="theme-color" style="background: #2e7d32;" data-theme="light-green" title="Light Green"></div>
-                    <div class="theme-color" style="background: #e65100;" data-theme="light-orange" title="Light Orange"></div>
-                    <div class="theme-color" style="background: #ad1457;" data-theme="pink" title="Pink"></div>
-                </div>
-                
                 <div class="theme-mode" id="themeMode">
                     <div class="theme-mode-icon">
                         <i class="fas fa-sun sun"></i>
@@ -1136,16 +1007,6 @@ By the Fans, For the Fans!! ✨"
                 <div class="album-title">Event 2023</div>
                 <button class="delete-album-btn" style="display: none;">×</button>
             </div>
-            <div class="album-card" data-album="event2">
-                <i class="fas fa-images album-icon"></i>
-                <div class="album-title">Cosplay Contest</div>
-                <button class="delete-album-btn" style="display: none;">×</button>
-            </div>
-            <div class="album-card" data-album="event3">
-                <i class="fas fa-images album-icon"></i>
-                <div class="album-title">Meetup 2024</div>
-                <button class="delete-album-btn" style="display: none;">×</button>
-            </div>
         </div>
         
         <div class="photos-container" id="photosContainer">
@@ -1200,25 +1061,12 @@ By the Fans, For the Fans!! ✨"
         // Sample photo data
         const photoData = {
             event1: [
-                "https://via.placeholder.com/400x400/FF2D74/FFFFFF?text=Event+1",
-                "https://via.placeholder.com/400x400/FF2D74/FFFFFF?text=Event+2",
-                "https://via.placeholder.com/400x400/FF2D74/FFFFFF?text=Event+3",
-                "https://via.placeholder.com/400x400/FF2D74/FFFFFF?text=Event+4",
-                "https://via.placeholder.com/400x400/FF2D74/FFFFFF?text=Event+5",
-                "https://via.placeholder.com/400x400/FF2D74/FFFFFF?text=Event+6"
-            ],
-            event2: [
-                "https://via.placeholder.com/400x400/03a9f4/FFFFFF?text=Cosplay+1",
-                "https://via.placeholder.com/400x400/03a9f4/FFFFFF?text=Cosplay+2",
-                "https://via.placeholder.com/400x400/03a9f4/FFFFFF?text=Cosplay+3",
-                "https://via.placeholder.com/400x400/03a9f4/FFFFFF?text=Cosplay+4"
-            ],
-            event3: [
-                "https://via.placeholder.com/400x400/4caf50/FFFFFF?text=Meetup+1",
-                "https://via.placeholder.com/400x400/4caf50/FFFFFF?text=Meetup+2",
-                "https://via.placeholder.com/400x400/4caf50/FFFFFF?text=Meetup+3",
-                "https://via.placeholder.com/400x400/4caf50/FFFFFF?text=Meetup+4",
-                "https://via.placeholder.com/400x400/4caf50/FFFFFF?text=Meetup+5"
+                "https://via.placeholder.com/400x400/03a9f4/FFFFFF?text=Event+1",
+                "https://via.placeholder.com/400x400/03a9f4/FFFFFF?text=Event+2",
+                "https://via.placeholder.com/400x400/03a9f4/FFFFFF?text=Event+3",
+                "https://via.placeholder.com/400x400/03a9f4/FFFFFF?text=Event+4",
+                "https://via.placeholder.com/400x400/03a9f4/FFFFFF?text=Event+5",
+                "https://via.placeholder.com/400x400/03a9f4/FFFFFF?text=Event+6"
             ]
         };
 
@@ -1574,42 +1422,6 @@ By the Fans, For the Fans!! ✨"
         if (localStorage.getItem('themeMode') === 'light') {
             document.body.classList.add('light-mode');
             themeModeText.textContent = 'Light Mode';
-        }
-
-        // Theme Color Selection
-        const themeColors = document.querySelectorAll('.theme-color');
-        
-        themeColors.forEach(color => {
-            color.addEventListener('click', () => {
-                // Remove all theme classes
-                document.body.classList.remove(
-                    'theme-dark-blue',
-                    'theme-sky-blue',
-                    'theme-light-green',
-                    'theme-light-orange',
-                    'theme-pink'
-                );
-                
-                // Add selected theme class
-                const theme = color.getAttribute('data-theme');
-                if (theme) {
-                    document.body.classList.add(`theme-${theme}`);
-                }
-                
-                // Update active state
-                themeColors.forEach(c => c.classList.remove('active'));
-                color.classList.add('active');
-                
-                // Save preference to localStorage
-                localStorage.setItem('themeColor', theme || '');
-            });
-        });
-
-        // Check for saved color preference
-        const savedColor = localStorage.getItem('themeColor');
-        if (savedColor) {
-            document.body.classList.add(`theme-${savedColor}`);
-            document.querySelector(`.theme-color[data-theme="${savedColor}"]`).classList.add('active');
         }
     </script>
 </body>
