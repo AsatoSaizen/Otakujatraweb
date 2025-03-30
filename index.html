@@ -686,6 +686,78 @@
         .back-to-albums:hover {
             text-decoration: underline;
         }
+
+        /* Grid Toggle Button */
+        .grid-toggle {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: #03a9f4;
+            color: white;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            cursor: pointer;
+            z-index: 1002;
+            box-shadow: 0 4px 12px rgba(3, 169, 244, 0.3);
+            transition: all 0.3s;
+        }
+        .grid-toggle:hover {
+            transform: scale(1.1);
+        }
+
+        /* Image Viewer */
+        .image-viewer {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.9);
+            z-index: 1003;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s;
+        }
+        .image-viewer.active {
+            opacity: 1;
+            visibility: visible;
+        }
+        .image-viewer img {
+            max-width: 90%;
+            max-height: 90%;
+            object-fit: contain;
+        }
+        .close-viewer {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            color: white;
+            font-size: 2rem;
+            cursor: pointer;
+        }
+        .nav-arrow {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            color: white;
+            font-size: 2rem;
+            cursor: pointer;
+            padding: 20px;
+        }
+        .nav-arrow.left {
+            left: 10px;
+        }
+        .nav-arrow.right {
+            right: 10px;
+        }
     </style>
 </head>
 <body>
@@ -777,18 +849,10 @@ By the Fans, For the Fans!! ✨"
         <h2>Gallery</h2>
         
         <div class="album-grid" id="albumGrid">
-            <!-- Albums will be added here dynamically -->
-            <div class="album-card" data-album="event1">
+            <!-- Only Pintest album remains -->
+            <div class="album-card" data-album="pintest">
                 <i class="fas fa-images album-icon"></i>
-                <div class="album-title">Event 2023</div>
-            </div>
-            <div class="album-card" data-album="event2">
-                <i class="fas fa-images album-icon"></i>
-                <div class="album-title">Cosplay Contest</div>
-            </div>
-            <div class="album-card" data-album="event3">
-                <i class="fas fa-images album-icon"></i>
-                <div class="album-title">Meetup 2024</div>
+                <div class="album-title">Pintest</div>
             </div>
         </div>
     </div>
@@ -805,33 +869,32 @@ By the Fans, For the Fans!! ✨"
         </div>
     </div>
 
+    <!-- Grid Toggle Button -->
+    <div class="grid-toggle" id="gridToggle">
+        <i class="fas fa-th"></i>
+    </div>
+
+    <!-- Image Viewer -->
+    <div class="image-viewer" id="imageViewer">
+        <div class="close-viewer" id="closeViewer">&times;</div>
+        <div class="nav-arrow left" id="prevImage"><i class="fas fa-chevron-left"></i></div>
+        <img id="viewerImage" src="" alt="">
+        <div class="nav-arrow right" id="nextImage"><i class="fas fa-chevron-right"></i></div>
+    </div>
+
     <footer>
         <p>© 2025 all rights reserved to Asato Saizen.</p>
     </footer>
 
     <script>
-        // Sample photo data
+        // Photo data with only Pintest album
         const photoData = {
-            event1: [
-                "https://via.placeholder.com/400x400/03a9f4/FFFFFF?text=Event+1",
-                "https://via.placeholder.com/400x400/03a9f4/FFFFFF?text=Event+2",
-                "https://via.placeholder.com/400x400/03a9f4/FFFFFF?text=Event+3",
-                "https://via.placeholder.com/400x400/03a9f4/FFFFFF?text=Event+4",
-                "https://via.placeholder.com/400x400/03a9f4/FFFFFF?text=Event+5",
-                "https://via.placeholder.com/400x400/03a9f4/FFFFFF?text=Event+6"
-            ],
-            event2: [
-                "https://via.placeholder.com/400x400/03a9f4/FFFFFF?text=Cosplay+1",
-                "https://via.placeholder.com/400x400/03a9f4/FFFFFF?text=Cosplay+2",
-                "https://via.placeholder.com/400x400/03a9f4/FFFFFF?text=Cosplay+3",
-                "https://via.placeholder.com/400x400/03a9f4/FFFFFF?text=Cosplay+4"
-            ],
-            event3: [
-                "https://via.placeholder.com/400x400/03a9f4/FFFFFF?text=Meetup+1",
-                "https://via.placeholder.com/400x400/03a9f4/FFFFFF?text=Meetup+2",
-                "https://via.placeholder.com/400x400/03a9f4/FFFFFF?text=Meetup+3",
-                "https://via.placeholder.com/400x400/03a9f4/FFFFFF?text=Meetup+4",
-                "https://via.placeholder.com/400x400/03a9f4/FFFFFF?text=Meetup+5"
+            pintest: [
+                "https://i.imgur.com/IJzy9Oq.jpeg",
+                "https://i.imgur.com/6WOd0Ra.jpeg",
+                "https://i.imgur.com/0MFaEUA.jpeg",
+                "https://i.imgur.com/H2QuCE2.jpeg",
+                "https://i.imgur.com/lfNlSwb.jpeg"
             ]
         };
 
@@ -914,13 +977,18 @@ By the Fans, For the Fans!! ✨"
             albumContentTitle.textContent = title;
             
             if (photoData[albumId]) {
-                photoData[albumId].forEach((photoUrl) => {
+                photoData[albumId].forEach((photoUrl, index) => {
                     const photoItem = document.createElement('div');
                     photoItem.className = 'photo-item';
                     photoItem.innerHTML = `
-                        <img src="${photoUrl}" alt="Gallery photo">
+                        <img src="${photoUrl}" alt="Gallery photo" data-index="${index}">
                     `;
                     photoGrid.appendChild(photoItem);
+                    
+                    // Add click handler to open image viewer
+                    photoItem.querySelector('img').addEventListener('click', (e) => {
+                        openImageViewer(albumId, parseInt(e.target.getAttribute('data-index')));
+                    });
                 });
             }
             
@@ -973,6 +1041,88 @@ By the Fans, For the Fans!! ✨"
             document.body.classList.add('light-mode');
             themeModeText.textContent = 'Light Mode';
         }
+
+        // Grid Toggle Functionality
+        const gridToggle = document.getElementById('gridToggle');
+        let isSquareGrid = true;
+        
+        gridToggle.addEventListener('click', () => {
+            isSquareGrid = !isSquareGrid;
+            updatePhotoGridLayout();
+            
+            // Animate the button
+            gridToggle.style.transform = 'scale(0.9)';
+            setTimeout(() => {
+                gridToggle.style.transform = 'scale(1)';
+                gridToggle.innerHTML = isSquareGrid ? '<i class="fas fa-th"></i>' : '<i class="fas fa-bars"></i>';
+            }, 200);
+        });
+        
+        function updatePhotoGridLayout() {
+            const photoItems = document.querySelectorAll('.photo-item');
+            photoItems.forEach(item => {
+                if (isSquareGrid) {
+                    item.style.aspectRatio = '1/1';
+                } else {
+                    item.style.aspectRatio = 'auto';
+                }
+            });
+        }
+
+        // Image Viewer Functionality
+        const imageViewer = document.getElementById('imageViewer');
+        const viewerImage = document.getElementById('viewerImage');
+        const closeViewer = document.getElementById('closeViewer');
+        const prevImage = document.getElementById('prevImage');
+        const nextImage = document.getElementById('nextImage');
+        
+        let currentAlbum = '';
+        let currentImageIndex = 0;
+        
+        function openImageViewer(albumId, index) {
+            currentAlbum = albumId;
+            currentImageIndex = index;
+            updateViewerImage();
+            imageViewer.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+        
+        function updateViewerImage() {
+            if (photoData[currentAlbum] && photoData[currentAlbum][currentImageIndex]) {
+                viewerImage.src = photoData[currentAlbum][currentImageIndex];
+            }
+        }
+        
+        function navigateImage(direction) {
+            if (direction === 'prev') {
+                currentImageIndex = (currentImageIndex - 1 + photoData[currentAlbum].length) % photoData[currentAlbum].length;
+            } else {
+                currentImageIndex = (currentImageIndex + 1) % photoData[currentAlbum].length;
+            }
+            updateViewerImage();
+        }
+        
+        closeViewer.addEventListener('click', () => {
+            imageViewer.classList.remove('active');
+            document.body.style.overflow = '';
+        });
+        
+        prevImage.addEventListener('click', () => navigateImage('prev'));
+        nextImage.addEventListener('click', () => navigateImage('next'));
+        
+        // Keyboard navigation for image viewer
+        document.addEventListener('keydown', (e) => {
+            if (imageViewer.classList.contains('active')) {
+                if (e.key === 'ArrowLeft') {
+                    navigateImage('prev');
+                } else if (e.key === 'ArrowRight') {
+                    navigateImage('next');
+                } else if (e.key === 'Escape') {
+                    imageViewer.classList.remove('active');
+                    document.body.style.overflow = '';
+                }
+            }
+        });
     </script>
 </body>
 </html>
