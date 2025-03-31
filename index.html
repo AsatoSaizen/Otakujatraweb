@@ -50,6 +50,9 @@
             font-size: 1.2rem;
             font-weight: 600;
         }
+        body.light-mode .nav-title {
+            color: black;
+        }
         .nav-icon {
             color: #C4B9CD;
             font-size: 1.1rem;
@@ -631,6 +634,29 @@
             color: #333;
         }
 
+        /* Trusted Store Panel */
+        .trusted-store-panel {
+            position: fixed;
+            top: 0;
+            right: -100%;
+            width: 100%;
+            max-width: 400px;
+            height: 100vh;
+            background: #1A1525;
+            border-left: 1px solid #2D263D;
+            padding: 2rem;
+            transition: right 0.3s ease;
+            z-index: 1000;
+            overflow-y: auto;
+        }
+        body.light-mode .trusted-store-panel {
+            background: #ffffff;
+            border-left: 1px solid #e0e0e0;
+        }
+        .trusted-store-panel.active {
+            right: 0;
+        }
+
         /* Touch improvements for album cards */
         @media (hover: none) {
             .album-card:hover {
@@ -648,9 +674,6 @@
     <nav>
         <div class="nav-left">
             <div class="nav-title">OtakuJatra</div>
-            <a href="https://github.com/AsatoSaizen" target="_blank" class="nav-icon" title="GitHub">
-                <i class="fab fa-github"></i>
-            </a>
         </div>
         
         <!-- Animated Menu Button -->
@@ -700,11 +723,11 @@ By the Fans, For the Fans!! ✨"
             <h3>Gallery</h3>
             <p>Browse through our collection of photos from past OtakuJatra events and gatherings.</p>
         </div>
-        <a href="https://anichart.net/Spring-2025" target="_blank" class="feature-card clickable-card">
-            <i class="fas fa-chart-pie feature-icon"></i>
-            <h3>anichart</h3>
-            <p>View statistics and insights about our community and events</p>
-        </a>
+        <div class="feature-card clickable-card" id="trustedStoreCard">
+            <i class="fas fa-store feature-icon"></i>
+            <h3>Trusted Store</h3>
+            <p>Check out our trusted merchandise partners and official stores</p>
+        </div>
         <div class="feature-card clickable-card" id="friendsCard">
             <i class="fas fa-users feature-icon"></i>
             <h3>Contributor</h3>
@@ -722,6 +745,20 @@ By the Fans, For the Fans!! ✨"
             <img src="https://avatars.githubusercontent.com/u/193106854?u=af480dbba8bdb36ae5305b6826df8910eebe0bf6&v=4" alt="Asato Saizen">
             <div class="profile-info">
                 <h3>Website Maintainer</h3>
+                <span><i class="fab fa-instagram"></i> asatosaizen</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Trusted Store Panel -->
+    <div class="trusted-store-panel" id="trustedStorePanel">
+        <div class="close-panel" id="closeTrustedStorePanel">&times;</div>
+        <h2>Trusted Store</h2>
+        
+        <div class="profile-card" onclick="window.open('https://www.instagram.com/asatosaizen?igsh=eHN6eXl6YnJrMW43')">
+            <img src="https://avatars.githubusercontent.com/u/193106854?u=af480dbba8bdb36ae5305b6826df8910eebe0bf6&v=4" alt="Saizen Prop E Store">
+            <div class="profile-info">
+                <h3>Saizen prop e store</h3>
                 <span><i class="fab fa-instagram"></i> asatosaizen</span>
             </div>
         </div>
@@ -779,10 +816,21 @@ By the Fans, For the Fans!! ✨"
         const friendsCard = document.getElementById('friendsCard');
         const profilePanel = document.getElementById('profilePanel');
         const closePanel = document.getElementById('closePanel');
+        
+        // Trusted Store Panel Functionality
+        const trustedStoreCard = document.getElementById('trustedStoreCard');
+        const trustedStorePanel = document.getElementById('trustedStorePanel');
+        const closeTrustedStorePanel = document.getElementById('closeTrustedStorePanel');
+        
         const overlay = document.getElementById('overlay');
         
         friendsCard.addEventListener('click', () => {
             profilePanel.classList.add('active');
+            overlay.classList.add('active');
+        });
+        
+        trustedStoreCard.addEventListener('click', () => {
+            trustedStorePanel.classList.add('active');
             overlay.classList.add('active');
         });
         
@@ -791,8 +839,14 @@ By the Fans, For the Fans!! ✨"
             overlay.classList.remove('active');
         });
         
+        closeTrustedStorePanel.addEventListener('click', () => {
+            trustedStorePanel.classList.remove('active');
+            overlay.classList.remove('active');
+        });
+        
         overlay.addEventListener('click', () => {
             profilePanel.classList.remove('active');
+            trustedStorePanel.classList.remove('active');
             overlay.classList.remove('active');
         });
         
@@ -814,6 +868,9 @@ By the Fans, For the Fans!! ✨"
         overlay.addEventListener('click', () => {
             if (profilePanel.classList.contains('active')) {
                 profilePanel.classList.remove('active');
+            }
+            if (trustedStorePanel.classList.contains('active')) {
+                trustedStorePanel.classList.remove('active');
             }
             if (galleryPanel.classList.contains('active')) {
                 galleryPanel.classList.remove('active');
