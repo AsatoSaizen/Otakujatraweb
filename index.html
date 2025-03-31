@@ -380,6 +380,11 @@
             box-shadow: inset 0 0 0 2px #03a9f4;
         }
         
+        /* Blue cursor effect when clicked */
+        .clickable-card:active::after {
+            box-shadow: inset 0 0 0 4px #03a9f4;
+        }
+        
         /* Profile Panel - Responsive */
         .profile-panel {
             position: fixed;
@@ -626,146 +631,16 @@
             color: #333;
         }
 
-        /* Album Content Panel */
-        .album-content-panel {
-            position: fixed;
-            top: 0;
-            right: -100%;
-            width: 100%;
-            max-width: 500px;
-            height: 100vh;
-            background: #1A1525;
-            border-left: 1px solid #2D263D;
-            padding: 2rem;
-            transition: right 0.3s ease;
-            z-index: 1001;
-            overflow-y: auto;
-        }
-        body.light-mode .album-content-panel {
-            background: #ffffff;
-            border-left: 1px solid #e0e0e0;
-        }
-        .album-content-panel.active {
-            right: 0;
-        }
-        .album-content-panel h2 {
-            color: #03a9f4;
-            margin-bottom: 1.5rem;
-            text-align: center;
-            font-size: 1.5rem;
-        }
-        .photo-grid {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 1rem;
-            margin-top: 1rem;
-        }
-        .photo-grid.grid-4 {
-            grid-template-columns: repeat(4, 1fr);
-        }
-        .photo-item {
-            position: relative;
-            border-radius: 8px;
-            overflow: hidden;
-            aspect-ratio: 1;
-        }
-        .photo-item img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            transition: transform 0.3s;
-        }
-        .photo-item:hover img {
-            transform: scale(1.05);
-        }
-        .back-to-albums {
-            display: flex;
-            align-items: center;
-            gap: 5px;
-            color: #03a9f4;
-            cursor: pointer;
-            margin-bottom: 1rem;
-        }
-        .back-to-albums:hover {
-            text-decoration: underline;
-        }
-
-        /* Grid Toggle Button */
-        .grid-toggle {
-            position: fixed;
-            bottom: 20px;
-            right: 20px;
-            background: #03a9f4;
-            color: white;
-            width: 50px;
-            height: 50px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.2rem;
-            cursor: pointer;
-            z-index: 1002;
-            box-shadow: 0 4px 12px rgba(3, 169, 244, 0.3);
-            transition: all 0.3s;
-            opacity: 0;
-            visibility: hidden;
-        }
-        .album-content-panel.active ~ .grid-toggle {
-            opacity: 1;
-            visibility: visible;
-        }
-        .grid-toggle:hover {
-            transform: scale(1.1);
-        }
-
-        /* Image Viewer */
-        .image-viewer {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.9);
-            z-index: 1003;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            opacity: 0;
-            visibility: hidden;
-            transition: all 0.3s;
-        }
-        .image-viewer.active {
-            opacity: 1;
-            visibility: visible;
-        }
-        .image-viewer img {
-            max-width: 90%;
-            max-height: 90%;
-            object-fit: contain;
-        }
-        .close-viewer {
-            position: absolute;
-            top: 20px;
-            right: 20px;
-            color: white;
-            font-size: 2rem;
-            cursor: pointer;
-        }
-        .nav-arrow {
-            position: absolute;
-            top: 50%;
-            transform: translateY(-50%);
-            color: white;
-            font-size: 2rem;
-            cursor: pointer;
-            padding: 20px;
-        }
-        .nav-arrow.left {
-            left: 10px;
-        }
-        .nav-arrow.right {
-            right: 10px;
+        /* Touch improvements for album cards */
+        @media (hover: none) {
+            .album-card:hover {
+                border-color: transparent;
+                transform: none;
+            }
+            .album-card:active {
+                border-color: #03a9f4;
+                transform: translateY(-3px);
+            }
         }
     </style>
 </head>
@@ -858,47 +733,24 @@ By the Fans, For the Fans!! ✨"
         <h2>Gallery</h2>
         
         <div class="album-grid" id="albumGrid">
-            <!-- Original Pintest album -->
-            <div class="album-card" data-album="pintest">
+            <!-- Pintest album with Google Drive link -->
+            <div class="album-card" onclick="window.open('https://drive.google.com/drive/folders/1V64vqzYr8hwhUVZ_gUy8sy81zU13cfXj?usp=sharing', '_blank')">
                 <i class="fas fa-images album-icon"></i>
                 <div class="album-title">Pintest</div>
             </div>
-            <!-- New Pintest 1 album -->
-            <div class="album-card" data-album="pintest1">
+            
+            <!-- tes123 album with Google Drive link -->
+            <div class="album-card" onclick="window.open('https://drive.google.com/drive/folders/196_ZX-k2-2z-TXKNkE64g6fRMyswVyXl', '_blank')">
                 <i class="fas fa-images album-icon"></i>
-                <div class="album-title">Pintest 1</div>
+                <div class="album-title">tes123</div>
             </div>
-            <!-- New Pintest 3 album -->
-            <div class="album-card" data-album="pintest3">
+            
+            <!-- tututu album with Google Drive link -->
+            <div class="album-card" onclick="window.open('https://drive.google.com/file/d/18aoipysbAun3PeVyNxE_BORpApCRUXSP/view?usp=drivesdk', '_blank')">
                 <i class="fas fa-images album-icon"></i>
-                <div class="album-title">Pintest 3</div>
+                <div class="album-title">tututu</div>
             </div>
         </div>
-    </div>
-
-    <!-- Album Content Panel -->
-    <div class="album-content-panel" id="albumContentPanel">
-        <div class="close-panel" id="closeAlbumContentPanel">&times;</div>
-        <h2 id="albumContentTitle">Album</h2>
-        <div class="back-to-albums" id="backToAlbums">
-            <i class="fas fa-arrow-left"></i> Back to Albums
-        </div>
-        <div class="photo-grid" id="photoGrid">
-            <!-- Photos will be added here dynamically -->
-        </div>
-    </div>
-
-    <!-- Grid Toggle Button -->
-    <div class="grid-toggle" id="gridToggle">
-        <i class="fas fa-th"></i>
-    </div>
-
-    <!-- Image Viewer -->
-    <div class="image-viewer" id="imageViewer">
-        <div class="close-viewer" id="closeViewer">&times;</div>
-        <div class="nav-arrow left" id="prevImage"><i class="fas fa-chevron-left"></i></div>
-        <img id="viewerImage" src="" alt="">
-        <div class="nav-arrow right" id="nextImage"><i class="fas fa-chevron-right"></i></div>
     </div>
 
     <footer>
@@ -906,24 +758,6 @@ By the Fans, For the Fans!! ✨"
     </footer>
 
     <script>
-        // Photo data with all albums
-        const photoData = {
-            pintest: [
-                "https://i.imgur.com/IJzy9Oq.jpeg",
-                "https://i.imgur.com/6WOd0Ra.jpeg",
-                "https://i.imgur.com/0MFaEUA.jpeg",
-                "https://i.imgur.com/H2QuCE2.jpeg",
-                "https://i.imgur.com/lfNlSwb.jpeg"
-            ],
-            pintest1: [
-                "https://i.imgur.com/H2QuCE2.jpeg",
-                "https://i.imgur.com/lfNlSwb.jpeg"
-            ],
-            pintest3: [
-                "https://i.imgur.com/lfNlSwb.jpeg"
-            ]
-        };
-
         // Menu Toggle Functionality
         const menuBtn = document.getElementById('menuBtn');
         const menuDropdown = document.getElementById('menuDropdown');
@@ -977,70 +811,12 @@ By the Fans, For the Fans!! ✨"
             overlay.classList.remove('active');
         });
 
-        // Album Content Panel Functionality
-        const albumContentPanel = document.getElementById('albumContentPanel');
-        const closeAlbumContentPanel = document.getElementById('closeAlbumContentPanel');
-        const backToAlbums = document.getElementById('backToAlbums');
-        const albumContentTitle = document.getElementById('albumContentTitle');
-        const photoGrid = document.getElementById('photoGrid');
-        
-        // Handle album clicks
-        function setupAlbumClickHandlers() {
-            document.querySelectorAll('.album-card').forEach(album => {
-                album.addEventListener('click', () => {
-                    const albumId = album.getAttribute('data-album');
-                    const albumTitle = album.querySelector('.album-title').textContent;
-                    showAlbumContent(albumId, albumTitle);
-                });
-            });
-        }
-        
-        // Initialize album click handlers
-        setupAlbumClickHandlers();
-        
-        function showAlbumContent(albumId, title) {
-            photoGrid.innerHTML = '';
-            albumContentTitle.textContent = title;
-            
-            if (photoData[albumId]) {
-                photoData[albumId].forEach((photoUrl, index) => {
-                    const photoItem = document.createElement('div');
-                    photoItem.className = 'photo-item';
-                    photoItem.innerHTML = `
-                        <img src="${photoUrl}" alt="Gallery photo" data-index="${index}">
-                    `;
-                    photoGrid.appendChild(photoItem);
-                    
-                    // Add click handler to open image viewer
-                    photoItem.querySelector('img').addEventListener('click', (e) => {
-                        openImageViewer(albumId, parseInt(e.target.getAttribute('data-index')));
-                    });
-                });
-            }
-            
-            albumContentPanel.classList.add('active');
-            overlay.classList.add('active');
-        }
-        
-        // Back to albums button
-        backToAlbums.addEventListener('click', () => {
-            albumContentPanel.classList.remove('active');
-        });
-        
-        closeAlbumContentPanel.addEventListener('click', () => {
-            albumContentPanel.classList.remove('active');
-            overlay.classList.remove('active');
-        });
-        
         overlay.addEventListener('click', () => {
             if (profilePanel.classList.contains('active')) {
                 profilePanel.classList.remove('active');
             }
             if (galleryPanel.classList.contains('active')) {
                 galleryPanel.classList.remove('active');
-            }
-            if (albumContentPanel.classList.contains('active')) {
-                albumContentPanel.classList.remove('active');
             }
             overlay.classList.remove('active');
         });
@@ -1068,84 +844,30 @@ By the Fans, For the Fans!! ✨"
             themeModeText.textContent = 'Light Mode';
         }
 
-        // Grid Toggle Functionality
-        const gridToggle = document.getElementById('gridToggle');
-        let currentGridColumns = 2; // Default is 2 columns
-        
-        gridToggle.addEventListener('click', () => {
-            // Toggle between 2 and 4 columns
-            currentGridColumns = currentGridColumns === 2 ? 4 : 2;
-            updatePhotoGridLayout();
+        // Add blue cursor effect when clicking on cards
+        document.querySelectorAll('.clickable-card').forEach(card => {
+            card.addEventListener('mousedown', () => {
+                card.classList.add('active-click');
+            });
             
-            // Animate the button
-            gridToggle.style.transform = 'scale(0.9)';
-            setTimeout(() => {
-                gridToggle.style.transform = 'scale(1)';
-                gridToggle.innerHTML = currentGridColumns === 2 ? '<i class="fas fa-th-large"></i>' : '<i class="fas fa-th"></i>';
-            }, 200);
-        });
-        
-        function updatePhotoGridLayout() {
-            if (currentGridColumns === 2) {
-                photoGrid.classList.remove('grid-4');
-            } else {
-                photoGrid.classList.add('grid-4');
-            }
-        }
-
-        // Image Viewer Functionality
-        const imageViewer = document.getElementById('imageViewer');
-        const viewerImage = document.getElementById('viewerImage');
-        const closeViewer = document.getElementById('closeViewer');
-        const prevImage = document.getElementById('prevImage');
-        const nextImage = document.getElementById('nextImage');
-        
-        let currentAlbum = '';
-        let currentImageIndex = 0;
-        
-        function openImageViewer(albumId, index) {
-            currentAlbum = albumId;
-            currentImageIndex = index;
-            updateViewerImage();
-            imageViewer.classList.add('active');
-            document.body.style.overflow = 'hidden';
-        }
-        
-        function updateViewerImage() {
-            if (photoData[currentAlbum] && photoData[currentAlbum][currentImageIndex]) {
-                viewerImage.src = photoData[currentAlbum][currentImageIndex];
-            }
-        }
-        
-        function navigateImage(direction) {
-            if (direction === 'prev') {
-                currentImageIndex = (currentImageIndex - 1 + photoData[currentAlbum].length) % photoData[currentAlbum].length;
-            } else {
-                currentImageIndex = (currentImageIndex + 1) % photoData[currentAlbum].length;
-            }
-            updateViewerImage();
-        }
-        
-        closeViewer.addEventListener('click', () => {
-            imageViewer.classList.remove('active');
-            document.body.style.overflow = '';
-        });
-        
-        prevImage.addEventListener('click', () => navigateImage('prev'));
-        nextImage.addEventListener('click', () => navigateImage('next'));
-        
-        // Keyboard navigation for image viewer
-        document.addEventListener('keydown', (e) => {
-            if (imageViewer.classList.contains('active')) {
-                if (e.key === 'ArrowLeft') {
-                    navigateImage('prev');
-                } else if (e.key === 'ArrowRight') {
-                    navigateImage('next');
-                } else if (e.key === 'Escape') {
-                    imageViewer.classList.remove('active');
-                    document.body.style.overflow = '';
-                }
-            }
+            card.addEventListener('mouseup', () => {
+                card.classList.remove('active-click');
+            });
+            
+            card.addEventListener('mouseleave', () => {
+                card.classList.remove('active-click');
+            });
+            
+            // For touch devices
+            card.addEventListener('touchstart', () => {
+                card.classList.add('active-click');
+            });
+            
+            card.addEventListener('touchend', () => {
+                setTimeout(() => {
+                    card.classList.remove('active-click');
+                }, 200);
+            });
         });
     </script>
 </body>
