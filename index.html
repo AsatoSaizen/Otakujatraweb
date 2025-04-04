@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>OtakuJatra - Repository Explorer</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
@@ -10,7 +10,7 @@
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Rickoto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
             -webkit-tap-highlight-color: transparent;
         }
         body {
@@ -19,6 +19,7 @@
             min-height: 100vh;
             line-height: 1.5;
             transition: background 0.3s, color 0.3s;
+            touch-action: pan-y;
         }
         body.light-mode {
             background: #f5f5f7;
@@ -50,9 +51,6 @@
             font-size: 1.2rem;
             font-weight: 600;
         }
-        body.light-mode .nav-title {
-            color: black;
-        }
         .nav-icon {
             color: #C4B9CD;
             font-size: 1.1rem;
@@ -66,7 +64,6 @@
             color: #03a9f4;
         }
 
-        /* Menu Button Styles */
         .menu-btn {
             width: 30px;
             height: 30px;
@@ -107,7 +104,6 @@
         .menu-btn__burger::after {
             transform: translateY(8px);
         }
-        /* Menu Button Animation */
         .menu-btn.open .menu-btn__burger {
             transform: translateX(-20px);
             background: transparent;
@@ -121,7 +117,6 @@
             background: #03a9f4;
         }
 
-        /* Menu Dropdown */
         .menu-dropdown {
             position: absolute;
             top: 70px;
@@ -169,7 +164,6 @@
             background: #e0e0e0;
         }
 
-        /* Theme options */
         .theme-options {
             margin: 0.5rem 0;
         }
@@ -219,7 +213,6 @@
             color: #666;
         }
 
-        /* Center logo with text */
         .big-center-logo {
             display: flex;
             flex-direction: column;
@@ -262,7 +255,6 @@
             color: #333;
         }
 
-        /* Social Buttons Container */
         .social-buttons {
             display: flex;
             gap: 15px;
@@ -271,7 +263,6 @@
             justify-content: center;
         }
 
-        /* Instagram Button */
         .instagram-btn {
             display: inline-flex;
             align-items: center;
@@ -290,7 +281,6 @@
             box-shadow: 0 4px 12px rgba(225, 48, 108, 0.3);
         }
 
-        /* Discord Button */
         .discord-btn {
             display: inline-flex;
             align-items: center;
@@ -309,7 +299,6 @@
             box-shadow: 0 4px 12px rgba(88, 101, 242, 0.3);
         }
 
-        /* Features section */
         .features {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
@@ -383,12 +372,6 @@
             box-shadow: inset 0 0 0 2px #03a9f4;
         }
         
-        /* Blue cursor effect when clicked */
-        .clickable-card:active::after {
-            box-shadow: inset 0 0 0 4px #03a9f4;
-        }
-        
-        /* Profile Panel - Responsive */
         .profile-panel {
             position: fixed;
             top: 0;
@@ -536,42 +519,6 @@
             color: #999;
         }
         
-        /* Touch improvements */
-        @media (hover: none) {
-            .feature-card:hover {
-                transform: none;
-                box-shadow: none;
-                border-color: #2D263D;
-            }
-            body.light-mode .feature-card:hover {
-                border-color: #e0e0e0;
-            }
-            .feature-card:active {
-                transform: translateY(-8px);
-                box-shadow: 0 12px 24px rgba(0, 0, 0, 0.3);
-                border-color: #03a9f4;
-            }
-            .clickable-card:hover::after {
-                box-shadow: none;
-            }
-            .profile-card:hover {
-                border-color: transparent;
-                transform: none;
-            }
-            .profile-card:active {
-                border-color: #03a9f4;
-                transform: scale(0.98);
-            }
-        }
-
-        /* YouTube icon styles */
-        .youtube-icon {
-            color: #FF0000;
-            margin-right: 5px;
-            transition: color 0.3s;
-        }
-
-        /* Gallery Panel Styles */
         .gallery-panel {
             position: fixed;
             top: 0;
@@ -613,6 +560,7 @@
             cursor: pointer;
             transition: all 0.3s;
             border: 1px solid transparent;
+            position: relative;
         }
         body.light-mode .album-card {
             background: #f5f5f7;
@@ -629,9 +577,308 @@
         .album-title {
             font-size: 0.9rem;
             color: #F4F0F6;
+            margin-bottom: 0.25rem;
         }
         body.light-mode .album-title {
             color: #333;
+        }
+        .album-count {
+            font-size: 0.8rem;
+            color: #A89DB5;
+        }
+        body.light-mode .album-count {
+            color: #666;
+        }
+
+        .album-content-panel {
+            position: fixed;
+            top: 0;
+            right: -100%;
+            width: 100%;
+            max-width: 500px;
+            height: 100vh;
+            background: #1A1525;
+            border-left: 1px solid #2D263D;
+            padding: 2rem;
+            transition: right 0.3s ease;
+            z-index: 1001;
+            overflow-y: auto;
+        }
+        body.light-mode .album-content-panel {
+            background: #ffffff;
+            border-left: 1px solid #e0e0e0;
+        }
+        .album-content-panel.active {
+            right: 0;
+        }
+        .album-content-panel h2 {
+            color: #03a9f4;
+            margin-bottom: 1.5rem;
+            text-align: center;
+            font-size: 1.5rem;
+        }
+        
+        /* Grid toggle button styles */
+        .grid-toggle-container {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            z-index: 1002;
+            display: none;
+        }
+        
+        .grid-toggle-btn {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: #03a9f4;
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            cursor: pointer;
+            box-shadow: 0 4px 12px rgba(3, 169, 244, 0.3);
+            transition: all 0.3s ease;
+            position: relative;
+            border: none;
+            outline: none;
+        }
+        
+        .grid-toggle-btn:hover {
+            transform: scale(1.1);
+        }
+        
+        .grid-toggle-btn.active {
+            background: #1A1525;
+            border: 2px solid #03a9f4;
+        }
+        
+        .grid-options {
+            position: absolute;
+            bottom: 60px;
+            right: 0;
+            background: #1A1525;
+            border-radius: 8px;
+            padding: 0.5rem;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+            display: none;
+            flex-direction: column;
+            gap: 0.5rem;
+            border: 1px solid #2D263D;
+        }
+        
+        .grid-option {
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #2D263D;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        
+        .grid-option:hover {
+            background: #03a9f4;
+        }
+        
+        .grid-option.active {
+            background: #03a9f4;
+        }
+        
+        .photo-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+        
+        .photo-grid.grid-4 {
+            grid-template-columns: repeat(4, 1fr);
+        }
+        
+        .photo-item {
+            position: relative;
+            border-radius: 8px;
+            overflow: hidden;
+            aspect-ratio: 1;
+            background: #2D263D;
+        }
+        body.light-mode .photo-item {
+            background: #f5f5f7;
+        }
+        .photo-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.3s;
+            cursor: pointer;
+        }
+        .photo-item:hover img {
+            transform: scale(1.05);
+        }
+        .no-photos {
+            grid-column: 1 / -1;
+            text-align: center;
+            color: #A89DB5;
+            padding: 2rem;
+        }
+        body.light-mode .no-photos {
+            color: #666;
+        }
+        
+        .back-to-albums {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            color: #03a9f4;
+            cursor: pointer;
+            margin-bottom: 1rem;
+            font-size: 0.9rem;
+        }
+        .back-to-albums:hover {
+            text-decoration: underline;
+        }
+        
+        /* Image viewer styles */
+        .image-viewer {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.9);
+            z-index: 1100;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+            touch-action: none;
+        }
+        
+        .image-viewer.active {
+            opacity: 1;
+            visibility: visible;
+        }
+        
+        .image-container {
+            position: relative;
+            max-width: 90%;
+            max-height: 80%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            touch-action: none;
+        }
+        
+        .image-container img {
+            max-width: 100%;
+            max-height: 80vh;
+            object-fit: contain;
+            transition: transform 0.3s ease;
+            touch-action: none;
+            transform-origin: 0 0;
+        }
+        
+        .image-nav {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 50px;
+            height: 50px;
+            background: rgba(0, 0, 0, 0.5);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.5rem;
+            cursor: pointer;
+            z-index: 1;
+            transition: all 0.3s ease;
+            border: none;
+        }
+        
+        .image-nav:hover {
+            background: rgba(3, 169, 244, 0.7);
+        }
+        
+        .image-nav.prev {
+            left: 20px;
+        }
+        
+        .image-nav.next {
+            right: 20px;
+        }
+        
+        .image-close {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            width: 40px;
+            height: 40px;
+            background: rgba(0, 0, 0, 0.5);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.5rem;
+            cursor: pointer;
+            z-index: 1;
+            transition: all 0.3s ease;
+            border: none;
+        }
+        
+        .image-close:hover {
+            background: rgba(255, 0, 0, 0.7);
+        }
+        
+        .image-index {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            color: white;
+            font-size: 1rem;
+            background: rgba(0, 0, 0, 0.5);
+            padding: 5px 10px;
+            border-radius: 20px;
+        }
+        
+        /* Download popup */
+        .download-popup {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: #1A1525;
+            padding: 1rem;
+            border-radius: 8px;
+            z-index: 1200;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+            border: 1px solid #2D263D;
+            display: none;
+        }
+        
+        .download-popup.active {
+            display: block;
+        }
+        
+        .download-option {
+            padding: 0.5rem 1rem;
+            cursor: pointer;
+            border-radius: 4px;
+            transition: background 0.2s;
+        }
+        
+        .download-option:hover {
+            background: #03a9f4;
         }
 
         /* Trusted Store Panel */
@@ -656,17 +903,11 @@
         .trusted-store-panel.active {
             right: 0;
         }
-
-        /* Touch improvements for album cards */
-        @media (hover: none) {
-            .album-card:hover {
-                border-color: transparent;
-                transform: none;
-            }
-            .album-card:active {
-                border-color: #03a9f4;
-                transform: translateY(-3px);
-            }
+        .trusted-store-panel h2 {
+            color: #03a9f4;
+            margin-bottom: 1.5rem;
+            text-align: center;
+            font-size: 1.5rem;
         }
     </style>
 </head>
@@ -674,18 +915,18 @@
     <nav>
         <div class="nav-left">
             <div class="nav-title">OtakuJatra</div>
+            <a href="https://github.com/AsatoSaizen" target="_blank" class="nav-icon" title="GitHub">
+                <i class="fab fa-github"></i>
+            </a>
         </div>
         
-        <!-- Animated Menu Button -->
         <div class="menu-btn" id="menuBtn">
             <div class="menu-btn__burger"></div>
         </div>
         
-        <!-- Menu Dropdown -->
         <div class="menu-dropdown" id="menuDropdown">
             <a href="#">Guide</a>
             <hr>
-            <!-- Theme Options -->
             <div class="theme-options">
                 <div class="theme-mode" id="themeMode">
                     <div class="theme-mode-icon">
@@ -700,12 +941,12 @@
 
     <div class="big-center-logo">
         <a href="https://youtu.be/RLw1-xyTvTY" target="_blank">
-            <img src="https://scontent.cdninstagram.com/v/t51.2885-19/488123249_644089784895348_3185349810036270309_n.jpg?stp=dst-jpg_s160x160_tt6&_nc_cat=103&ccb=1-7&_nc_sid=bf7eb4&_nc_ohc=nkmAUlybtgQQ7kNvgHLRyGV&_nc_oc=Adlu1HfoIHLLEdytZtKeKy0h1w9WAzzKrxoq89whhfWGaEnOAzbM2gwFz3mCaWBK-CY&_nc_zt=24&_nc_ht=scontent.cdninstagram.com&oh=00_AYEfXRwddbbN63XMEuVfTUpkrzAiEz16v-Dl7zKTKlg0BQ&oe=67F3BF58" alt="Clickable Logo">
+            <img src="https://scontent.cdninstagram.com/v/t51.2885-19/488123249_644089784895348_3185349810036270309_n.jpg?stp=dst-jpg_s160x160_tt6&_nc_cat=103&ccb=1-7&_nc_sid=bf7eb4&_nc_ohc=qI77xRYBI10Q7kNvwEqXgCN&_nc_oc=AdmTHFDOHXf4WCIAwZePu5VaBmJjT41o3X9H2SnkOs7gQThUDORbZy2ebAuwVUbuUss&_nc_zt=24&_nc_ht=scontent.cdninstagram.com&oh=00_AYGoD7MlsHOp6NvB35zqcLe556xsRTmMfSKDUaY_VPuvfQ&oe=67F5B998" alt="Clickable Logo">
             <div class="logo-text">OtakuJatra</div>
         </a>
         <div class="intro-text">
             "Nepal's Biggest Pop-Culture Convention
-By the Fans, For the Fans!!
+By the Fans, For the Fans!!"
         </div>
         <div class="social-buttons">
             <a href="https://www.instagram.com/otakujatra?igsh=MWl6bzZvM3Q3aWl1bg==" target="_blank" class="instagram-btn">
@@ -726,7 +967,7 @@ By the Fans, For the Fans!!
         <div class="feature-card clickable-card" id="trustedStoreCard">
             <i class="fas fa-store feature-icon"></i>
             <h3>Trusted Store</h3>
-            <p>Check out our trusted merchandise partners and official stores</p>
+            <p>Find trusted stores for your anime merchandise and pop-culture needs</p>
         </div>
         <div class="feature-card clickable-card" id="friendsCard">
             <i class="fas fa-users feature-icon"></i>
@@ -735,7 +976,6 @@ By the Fans, For the Fans!!
         </div>
     </div>
 
-    <!-- Profile Panel -->
     <div class="overlay" id="overlay"></div>
     <div class="profile-panel" id="profilePanel">
         <div class="close-panel" id="closePanel">&times;</div>
@@ -754,31 +994,32 @@ By the Fans, For the Fans!!
     <div class="trusted-store-panel" id="trustedStorePanel">
         <div class="close-panel" id="closeTrustedStorePanel">&times;</div>
         <h2>Trusted Stores</h2>
-<footer>
+        
+       <footer>
   <p>© Note you can rent coses from the other untitled store as well dm them on their social handle</p>
 </footer>
-        
-        <div class="profile-card" onclick="window.open('https://www.instagram.com/saizenpropestore?igsh=MWVocXI0NmJqNXJqYw==')">
-            <img src="https://scontent.cdninstagram.com/v/t51.2885-19/472323067_2873087249526739_7941777930705268963_n.jpg?stp=dst-jpg_s160x160_tt6&_nc_cat=106&ccb=1-7&_nc_sid=bf7eb4&_nc_ohc=MajqvevX7F8Q7kNvgFaHTJB&_nc_oc=AdkPYRQCGNaUIbdzm90fV6l7Eoxlr7AvuIMP3UuzZS0AAu4UIlQDcYzYHKo60LNcH_x4quK1-lwmvqcvqI6mZf9w&_nc_zt=24&_nc_ht=scontent.cdninstagram.com&oh=00_AYHas07BAxoyy85A6iKqY51uNX9Xz_YB0_cVvqnQJbM_Jg&oe=67F0503E" alt="saizenpropestore">
-            <div class="profile-info">
-                <h3>Pre order props</h3>
-                <span><i class="fab fa-instagram"></i> saizenpropestore</span>
-            </div>
-        </div>
- <div class="profile-card" onclick="window.open('https://www.instagram.com/_cosplay_mania?igsh=MXF2ZGoxbmVtdWM3YQ==')">
-            <img src="https://scontent.cdninstagram.com/v/t51.2885-19/289540198_133350972664476_3910646222464333620_n.jpg?stp=dst-jpg_s160x160_tt6&_nc_cat=103&ccb=1-7&_nc_sid=bf7eb4&_nc_ohc=-QJVx34yJLAQ7kNvgESl6a5&_nc_oc=AdnIXTa03WJvC6JaJ92_impBp5xJ-oG2LR8ymY3JQ2C28y4Fhgpk3_FUOfRlOEwj7Gk&_nc_zt=24&_nc_ht=scontent.cdninstagram.com&oh=00_AYGO1fzdQqbs1ytQ97Qy9jAyTOAOV7GbI-BOMj9GI3iNMg&oe=67F3A82D" alt="saizenpropestore">
-            <div class="profile-info">
-                <h3>Cosplay store</h3>
-                <span><i class="fab fa-instagram"></i> _cosplay_mania</span>
-            </div>
-        </div>
- <div class="profile-card" onclick="window.open('https://www.instagram.com/collectella?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==')">
-   <img src="https://scontent.cdninstagram.com/v/t51.2885-19/350626251_667935218503322_8882953237136911705_n.jpg?stp=dst-jpg_s160x160_tt6&_nc_cat=107&ccb=1-7&_nc_sid=bf7eb4&_nc_ohc=4A9fAzVOC9kQ7kNvgH8TWd3&_nc_oc=AdkFkYDQl2_CXNHt2pI_dhshKY2D1WByz-Z5XgEGi973mbO-VJHqt2puOj0AldJUs60&_nc_zt=24&_nc_ht=scontent.cdninstagram.com&oh=00_AYEHnZH8o7JhZ6C5iBMsAgIf3nle9g3KVi5mOytl9F9Tag&oe=67F3CC47" alt="saizenpropestore">
-   <div class="profile-info">
-     <h3>Cosplay store</h3>
-     <span><i class="fab fa-instagram"></i> collectella</span>
-   </div>
- </div>
+
+<div class="profile-card" onclick="window.open('https://www.instagram.com/saizenpropestore?igsh=MWVocXI0NmJqNXJqYw==')">
+  <img src="https://scontent.cdninstagram.com/v/t51.2885-19/472323067_2873087249526739_7941777930705268963_n.jpg?stp=dst-jpg_s160x160_tt6&_nc_cat=106&ccb=1-7&_nc_sid=bf7eb4&_nc_ohc=MajqvevX7F8Q7kNvgFaHTJB&_nc_oc=AdkPYRQCGNaUIbdzm90fV6l7Eoxlr7AvuIMP3UuzZS0AAu4UIlQDcYzYHKo60LNcH_x4quK1-lwmvqcvqI6mZf9w&_nc_zt=24&_nc_ht=scontent.cdninstagram.com&oh=00_AYHas07BAxoyy85A6iKqY51uNX9Xz_YB0_cVvqnQJbM_Jg&oe=67F0503E" alt="saizenpropestore">
+  <div class="profile-info">
+    <h3>Pre order props</h3>
+    <span><i class="fab fa-instagram"></i> saizenpropestore</span>
+  </div>
+</div>
+<div class="profile-card" onclick="window.open('https://www.instagram.com/_cosplay_mania?igsh=MXF2ZGoxbmVtdWM3YQ==')">
+  <img src="https://scontent.cdninstagram.com/v/t51.2885-19/289540198_133350972664476_3910646222464333620_n.jpg?stp=dst-jpg_s160x160_tt6&_nc_cat=103&ccb=1-7&_nc_sid=bf7eb4&_nc_ohc=-QJVx34yJLAQ7kNvgESl6a5&_nc_oc=AdnIXTa03WJvC6JaJ92_impBp5xJ-oG2LR8ymY3JQ2C28y4Fhgpk3_FUOfRlOEwj7Gk&_nc_zt=24&_nc_ht=scontent.cdninstagram.com&oh=00_AYGO1fzdQqbs1ytQ97Qy9jAyTOAOV7GbI-BOMj9GI3iNMg&oe=67F3A82D" alt="saizenpropestore">
+  <div class="profile-info">
+    <h3>Cosplay store</h3>
+    <span><i class="fab fa-instagram"></i> _cosplay_mania</span>
+  </div>
+</div>
+<div class="profile-card" onclick="window.open('https://www.instagram.com/collectella?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==')">
+  <img src="https://scontent.cdninstagram.com/v/t51.2885-19/350626251_667935218503322_8882953237136911705_n.jpg?stp=dst-jpg_s160x160_tt6&_nc_cat=107&ccb=1-7&_nc_sid=bf7eb4&_nc_ohc=4A9fAzVOC9kQ7kNvgH8TWd3&_nc_oc=AdkFkYDQl2_CXNHt2pI_dhshKY2D1WByz-Z5XgEGi973mbO-VJHqt2puOj0AldJUs60&_nc_zt=24&_nc_ht=scontent.cdninstagram.com&oh=00_AYEHnZH8o7JhZ6C5iBMsAgIf3nle9g3KVi5mOytl9F9Tag&oe=67F3CC47" alt="saizenpropestore">
+  <div class="profile-info">
+    <h3>Cosplay store</h3>
+    <span><i class="fab fa-instagram"></i> collectella</span>
+  </div>
+</div>
 <div class="profile-card" onclick="window.open('https://www.instagram.com/nep.cosrent?igsh=MTlnbDliNmU4YWdsNg==')">
   <img src="https://scontent.cdninstagram.com/v/t51.2885-19/456202631_298379210000405_6737728710563318306_n.jpg?stp=dst-jpg_s160x160_tt6&_nc_cat=105&ccb=1-7&_nc_sid=bf7eb4&_nc_aid=0&_nc_ohc=6yU4OsNWfr0Q7kNvgGR9DBG&_nc_oc=AdmBZkge0zUQ_rDbVfTj9r5ENVp7VUmLNAUGFEC5NW871BrR-ciy4HAG7A8WVlyRja8&_nc_zt=24&_nc_ht=scontent.cdninstagram.com&oh=00_AYFHUv8v_7qxqTponRbI4ySNS9qEAUya8Z5Y87YRRQ2ptQ&oe=67F3D0CD" alt="saizenpropestore">
   <div class="profile-info">
@@ -788,37 +1029,344 @@ By the Fans, For the Fans!!
 </div>
 </div>
 
-    <!-- Gallery Panel -->
     <div class="gallery-panel" id="galleryPanel">
         <div class="close-panel" id="closeGalleryPanel">&times;</div>
         <h2>Gallery</h2>
         
         <div class="album-grid" id="albumGrid">
-            <!-- Pintest album with Google Drive link -->
-            <div class="album-card" onclick="window.open('https://drive.google.com/drive/folders/1V64vqzYr8hwhUVZ_gUy8sy81zU13cfXj?usp=sharing', '_blank')">
-                <i class="fas fa-images album-icon"></i>
-                <div class="album-title">Pintest</div>
-            </div>
-            
-            <!-- tes123 album with Google Drive link -->
-            <div class="album-card" onclick="window.open('https://drive.google.com/drive/folders/196_ZX-k2-2z-TXKNkE64g6fRMyswVyXl', '_blank')">
-                <i class="fas fa-images album-icon"></i>
-                <div class="album-title">tes123</div>
-            </div>
-            
-            <!-- tututu album with Google Drive link -->
-            <div class="album-card" onclick="window.open('https://drive.google.com/file/d/18aoipysbAun3PeVyNxE_BORpApCRUXSP/view?usp=drivesdk', '_blank')">
-                <i class="fas fa-images album-icon"></i>
-                <div class="album-title">tututu</div>
-            </div>
+            <!-- Albums will be added here dynamically -->
         </div>
     </div>
 
+    <div class="album-content-panel" id="albumContentPanel">
+        <div class="close-panel" id="closeAlbumContentPanel">&times;</div>
+        <h2 id="albumContentTitle">Album</h2>
+        <div class="back-to-albums" id="backToAlbums">
+            <i class="fas fa-arrow-left"></i> Back to Albums
+        </div>
+        <div class="photo-grid" id="photoGrid">
+            <!-- Photos will be added here dynamically -->
+        </div>
+    </div>
+    
+    <!-- Grid toggle button (only visible in album view) -->
+    <div class="grid-toggle-container" id="gridToggleContainer">
+        <button class="grid-toggle-btn" id="gridToggleBtn">
+            <i class="fas fa-th"></i>
+        </button>
+        <div class="grid-options" id="gridOptions">
+            <div class="grid-option active" data-columns="2">
+                <i class="fas fa-th"></i>
+            </div>
+            <div class="grid-option" data-columns="4">
+                <i class="fas fa-th-large"></i>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Image viewer -->
+    <div class="image-viewer" id="imageViewer">
+        <div class="image-index" id="imageIndex">1/10</div>
+        <button class="image-close" id="imageClose">
+            <i class="fas fa-times"></i>
+        </button>
+        <div class="image-container" id="imageContainer">
+            <button class="image-nav prev" id="imagePrev">
+                <i class="fas fa-chevron-left"></i>
+            </button>
+            <img id="viewedImage" src="" alt="">
+            <button class="image-nav next" id="imageNext">
+                <i class="fas fa-chevron-right"></i>
+            </button>
+        </div>
+    </div>
+    
+    <!-- Download popup -->
+    <div class="download-popup" id="downloadPopup">
+        <div class="download-option" id="downloadCurrent">Download this image</div>
+    </div>
+
     <footer>
-        <p>© 2025 all rights reserved to Asato Saizen and the contents Owner</p>
+        <p>© 2025 all rights reserved to Asato Saizen.</p>
     </footer>
 
     <script>
+        // ImageKit configuration
+        const imageKit = {
+            urlEndpoint: 'https://ik.imagekit.io/asatosaizen',
+            privateKey: 'private_5vBD4u7CiX6+y87crPyz8J5Zei4=',
+            publicKey: 'public_5vBD4u7CiX6+y87crPyz8J5Zei4='
+        };
+
+        // Current state variables
+        let currentAlbumFiles = [];
+        let currentImageIndex = 0;
+        
+        // Pinch zoom variables
+        let initialDistance = null;
+        let lastScale = 1;
+        let posX = 0;
+        let posY = 0;
+        let scale = 1;
+        let isDragging = false;
+        let startX, startY;
+        
+        // DOM elements
+        const gridToggleContainer = document.getElementById('gridToggleContainer');
+        const gridToggleBtn = document.getElementById('gridToggleBtn');
+        const gridOptions = document.getElementById('gridOptions');
+        const photoGrid = document.getElementById('photoGrid');
+        const imageViewer = document.getElementById('imageViewer');
+        const viewedImage = document.getElementById('viewedImage');
+        const imagePrev = document.getElementById('imagePrev');
+        const imageNext = document.getElementById('imageNext');
+        const imageClose = document.getElementById('imageClose');
+        const imageIndex = document.getElementById('imageIndex');
+        const downloadPopup = document.getElementById('downloadPopup');
+        const downloadCurrent = document.getElementById('downloadCurrent');
+
+        // Function to fetch ALL files from ImageKit with pagination
+        async function fetchAllImageKitFiles() {
+            try {
+                let allFiles = [];
+                let skip = 0;
+                const limit = 1000;
+                let hasMore = true;
+
+                while (hasMore) {
+                    const response = await fetch(`https://api.imagekit.io/v1/files?limit=${limit}&skip=${skip}`, {
+                        method: 'GET',
+                        headers: {
+                            'Authorization': `Basic ${btoa(`${imageKit.privateKey}:`)}`,
+                            'Content-Type': 'application/json'
+                        }
+                    });
+                    
+                    if (!response.ok) {
+                        throw new Error(`Failed to fetch files: ${response.status} ${response.statusText}`);
+                    }
+                    
+                    const data = await response.json();
+                    allFiles = [...allFiles, ...data];
+                    
+                    if (data.length < limit) {
+                        hasMore = false;
+                    } else {
+                        skip += limit;
+                    }
+                }
+                
+                console.log('Raw files data:', allFiles);
+                return allFiles;
+            } catch (error) {
+                console.error('Error fetching files:', error);
+                return [];
+            }
+        }
+
+        // Function to organize files by folders
+        function organizeFilesByFolders(files) {
+            const folders = new Map();
+            
+            files.forEach(file => {
+                if (file.filePath) {
+                    // Handle both forward and backward slashes in paths
+                    const pathParts = file.filePath.split(/[\\/]/).filter(part => part.trim() !== '');
+                    
+                    if (pathParts.length >= 1) {
+                        const folderName = pathParts.length > 1 ? pathParts[0] : 'Main Album';
+                        
+                        if (!folders.has(folderName)) {
+                            folders.set(folderName, []);
+                        }
+                        folders.get(folderName).push(file);
+                    }
+                }
+            });
+            
+            console.log('Organized folders:', Array.from(folders.keys()));
+            return folders;
+        }
+
+        // Function to render albums in the gallery
+        async function renderAlbums() {
+            const albumGrid = document.getElementById('albumGrid');
+            albumGrid.innerHTML = '<div class="no-photos">Loading albums...</div>';
+            
+            try {
+                const allFiles = await fetchAllImageKitFiles();
+                console.log('Total files count:', allFiles.length);
+                
+                const folders = organizeFilesByFolders(allFiles);
+                
+                if (folders.size === 0) {
+                    albumGrid.innerHTML = '<div class="no-photos">No albums found in ImageKit library</div>';
+                    return;
+                }
+                
+                albumGrid.innerHTML = '';
+                
+                folders.forEach((files, folderName) => {
+                    const albumCard = document.createElement('div');
+                    albumCard.className = 'album-card';
+                    albumCard.innerHTML = `
+                        <i class="fas fa-folder album-icon"></i>
+                        <div class="album-title">${folderName}</div>
+                        <div class="album-count">${files.length} items</div>
+                    `;
+
+                    albumCard.addEventListener('click', async () => {
+                        currentAlbumFiles = files.sort((a, b) => a.name.localeCompare(b.name));
+                        await renderAlbumPhotos(currentAlbumFiles, folderName);
+                    });
+                    
+                    albumGrid.appendChild(albumCard);
+                });
+            } catch (error) {
+                console.error('Render error:', error);
+                albumGrid.innerHTML = '<div class="no-photos">Error loading content</div>';
+            }
+        }
+        
+        // Function to render photos in an album
+        async function renderAlbumPhotos(files, folderName) {
+            const photoGrid = document.getElementById('photoGrid');
+            photoGrid.innerHTML = '<div class="no-photos">Loading photos...</div>';
+            
+            document.getElementById('albumContentTitle').textContent = folderName;
+            document.getElementById('albumContentPanel').classList.add('active');
+            document.getElementById('overlay').classList.add('active');
+            
+            // Show grid toggle button
+            gridToggleContainer.style.display = 'block';
+            
+            photoGrid.innerHTML = '';
+            
+            files.forEach((file, index) => {
+                // Properly construct the URL without double slashes
+                let imgPath = file.filePath;
+                if (imgPath.startsWith('/')) {
+                    imgPath = imgPath.substring(1);
+                }
+                
+                // Add cache-busting parameter
+                const timestamp = new Date().getTime();
+                const imgUrl = `${imageKit.urlEndpoint}/${imgPath}?${timestamp}`;
+                
+                const photoItem = document.createElement('div');
+                photoItem.className = 'photo-item';
+                photoItem.innerHTML = `
+                    <img src="${imgUrl}" alt="${file.name || file.filePath}" loading="lazy" data-index="${index}">
+                `;
+                photoGrid.appendChild(photoItem);
+                
+                // Add click event to open image viewer
+                const imgElement = photoItem.querySelector('img');
+                imgElement.addEventListener('click', () => {
+                    openImageViewer(index);
+                });
+                
+                // Add long press/right click event for download
+                let pressTimer;
+                
+                imgElement.addEventListener('mousedown', (e) => {
+                    if (e.button === 2) { // Right click
+                        e.preventDefault();
+                        showDownloadPopup(index, e);
+                    } else { // Left click
+                        pressTimer = setTimeout(() => {
+                            showDownloadPopup(index, e);
+                        }, 1000);
+                    }
+                });
+                
+                imgElement.addEventListener('mouseup', () => {
+                    clearTimeout(pressTimer);
+                });
+                
+                imgElement.addEventListener('mouseleave', () => {
+                    clearTimeout(pressTimer);
+                });
+                
+                imgElement.addEventListener('contextmenu', (e) => {
+                    e.preventDefault();
+                });
+                
+                // Touch events for mobile
+                imgElement.addEventListener('touchstart', (e) => {
+                    pressTimer = setTimeout(() => {
+                        showDownloadPopup(index, e);
+                    }, 1000);
+                });
+                
+                imgElement.addEventListener('touchend', () => {
+                    clearTimeout(pressTimer);
+                });
+            });
+        }
+        
+        // Function to open image viewer
+        function openImageViewer(index) {
+            currentImageIndex = index;
+            resetImageTransform();
+            updateImageViewer();
+            imageViewer.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+        
+        // Function to reset image transform
+        function resetImageTransform() {
+            scale = 1;
+            posX = 0;
+            posY = 0;
+            updateImageTransform();
+        }
+        
+        // Function to update image transform
+        function updateImageTransform() {
+            viewedImage.style.transform = `translate(${posX}px, ${posY}px) scale(${scale})`;
+        }
+        
+        // Function to update image viewer with current image
+        function updateImageViewer() {
+            const file = currentAlbumFiles[currentImageIndex];
+            let imgPath = file.filePath;
+            if (imgPath.startsWith('/')) {
+                imgPath = imgPath.substring(1);
+            }
+            const imgUrl = `${imageKit.urlEndpoint}/${imgPath}`;
+            
+            viewedImage.src = imgUrl;
+            imageIndex.textContent = `${currentImageIndex + 1}/${currentAlbumFiles.length}`;
+        }
+        
+        // Function to show download popup
+        function showDownloadPopup(index, event) {
+            currentImageIndex = index;
+            
+            // Position the popup near the click/touch
+            const x = event.clientX || event.touches[0].clientX;
+            const y = event.clientY || event.touches[0].clientY;
+            
+            downloadPopup.style.left = `${x}px`;
+            downloadPopup.style.top = `${y}px`;
+            downloadPopup.classList.add('active');
+            
+            // Close popup when clicking elsewhere
+            const closePopup = (e) => {
+                if (!downloadPopup.contains(e.target)) {
+                    downloadPopup.classList.remove('active');
+                    document.removeEventListener('click', closePopup);
+                    document.removeEventListener('touchstart', closePopup);
+                }
+            };
+            
+            setTimeout(() => {
+                document.addEventListener('click', closePopup);
+                document.addEventListener('touchstart', closePopup);
+            }, 10);
+        }
+
         // Menu Toggle Functionality
         const menuBtn = document.getElementById('menuBtn');
         const menuDropdown = document.getElementById('menuDropdown');
@@ -828,7 +1376,6 @@ By the Fans, For the Fans!!
             menuDropdown.classList.toggle('active');
         });
         
-        // Close menu when clicking outside
         document.addEventListener('click', (e) => {
             if (!menuBtn.contains(e.target) && !menuDropdown.contains(e.target)) {
                 menuBtn.classList.remove('open');
@@ -840,21 +1387,10 @@ By the Fans, For the Fans!!
         const friendsCard = document.getElementById('friendsCard');
         const profilePanel = document.getElementById('profilePanel');
         const closePanel = document.getElementById('closePanel');
-        
-        // Trusted Store Panel Functionality
-        const trustedStoreCard = document.getElementById('trustedStoreCard');
-        const trustedStorePanel = document.getElementById('trustedStorePanel');
-        const closeTrustedStorePanel = document.getElementById('closeTrustedStorePanel');
-        
         const overlay = document.getElementById('overlay');
         
         friendsCard.addEventListener('click', () => {
             profilePanel.classList.add('active');
-            overlay.classList.add('active');
-        });
-        
-        trustedStoreCard.addEventListener('click', () => {
-            trustedStorePanel.classList.add('active');
             overlay.classList.add('active');
         });
         
@@ -863,13 +1399,22 @@ By the Fans, For the Fans!!
             overlay.classList.remove('active');
         });
         
-        closeTrustedStorePanel.addEventListener('click', () => {
-            trustedStorePanel.classList.remove('active');
+        overlay.addEventListener('click', () => {
+            profilePanel.classList.remove('active');
             overlay.classList.remove('active');
         });
         
-        overlay.addEventListener('click', () => {
-            profilePanel.classList.remove('active');
+        // Trusted Store Panel Functionality
+        const trustedStoreCard = document.getElementById('trustedStoreCard');
+        const trustedStorePanel = document.getElementById('trustedStorePanel');
+        const closeTrustedStorePanel = document.getElementById('closeTrustedStorePanel');
+        
+        trustedStoreCard.addEventListener('click', () => {
+            trustedStorePanel.classList.add('active');
+            overlay.classList.add('active');
+        });
+        
+        closeTrustedStorePanel.addEventListener('click', () => {
             trustedStorePanel.classList.remove('active');
             overlay.classList.remove('active');
         });
@@ -879,9 +1424,10 @@ By the Fans, For the Fans!!
         const galleryPanel = document.getElementById('galleryPanel');
         const closeGalleryPanel = document.getElementById('closeGalleryPanel');
         
-        galleryCard.addEventListener('click', () => {
+        galleryCard.addEventListener('click', async () => {
             galleryPanel.classList.add('active');
             overlay.classList.add('active');
+            await renderAlbums();
         });
         
         closeGalleryPanel.addEventListener('click', () => {
@@ -889,6 +1435,22 @@ By the Fans, For the Fans!!
             overlay.classList.remove('active');
         });
 
+        // Album Content Panel Functionality
+        const albumContentPanel = document.getElementById('albumContentPanel');
+        const closeAlbumContentPanel = document.getElementById('closeAlbumContentPanel');
+        const backToAlbums = document.getElementById('backToAlbums');
+        
+        backToAlbums.addEventListener('click', () => {
+            albumContentPanel.classList.remove('active');
+            gridToggleContainer.style.display = 'none';
+        });
+        
+        closeAlbumContentPanel.addEventListener('click', () => {
+            albumContentPanel.classList.remove('active');
+            overlay.classList.remove('active');
+            gridToggleContainer.style.display = 'none';
+        });
+        
         overlay.addEventListener('click', () => {
             if (profilePanel.classList.contains('active')) {
                 profilePanel.classList.remove('active');
@@ -898,6 +1460,10 @@ By the Fans, For the Fans!!
             }
             if (galleryPanel.classList.contains('active')) {
                 galleryPanel.classList.remove('active');
+            }
+            if (albumContentPanel.classList.contains('active')) {
+                albumContentPanel.classList.remove('active');
+                gridToggleContainer.style.display = 'none';
             }
             overlay.classList.remove('active');
         });
@@ -915,40 +1481,173 @@ By the Fans, For the Fans!!
                 themeModeText.textContent = 'Dark Mode';
             }
             
-            // Save preference to localStorage
             localStorage.setItem('themeMode', document.body.classList.contains('light-mode') ? 'light' : 'dark');
         });
 
-        // Check for saved theme preference
         if (localStorage.getItem('themeMode') === 'light') {
             document.body.classList.add('light-mode');
             themeModeText.textContent = 'Light Mode';
         }
 
-        // Add blue cursor effect when clicking on cards
-        document.querySelectorAll('.clickable-card').forEach(card => {
-            card.addEventListener('mousedown', () => {
-                card.classList.add('active-click');
+        // Grid toggle functionality
+        gridToggleBtn.addEventListener('click', () => {
+            gridOptions.style.display = gridOptions.style.display === 'flex' ? 'none' : 'flex';
+        });
+        
+        document.querySelectorAll('.grid-option').forEach(option => {
+            option.addEventListener('click', () => {
+                const columns = option.dataset.columns;
+                
+                // Update active state
+                document.querySelectorAll('.grid-option').forEach(opt => {
+                    opt.classList.remove('active');
+                });
+                option.classList.add('active');
+                
+                // Update grid
+                photoGrid.className = 'photo-grid';
+                if (columns === '4') {
+                    photoGrid.classList.add('grid-4');
+                }
+                
+                // Close options
+                gridOptions.style.display = 'none';
             });
+        });
+        
+        // Image viewer functionality
+        imagePrev.addEventListener('click', () => {
+            currentImageIndex = (currentImageIndex - 1 + currentAlbumFiles.length) % currentAlbumFiles.length;
+            resetImageTransform();
+            updateImageViewer();
+        });
+        
+        imageNext.addEventListener('click', () => {
+            currentImageIndex = (currentImageIndex + 1) % currentAlbumFiles.length;
+            resetImageTransform();
+            updateImageViewer();
+        });
+        
+        imageClose.addEventListener('click', () => {
+            imageViewer.classList.remove('active');
+            document.body.style.overflow = '';
+            resetImageTransform();
+        });
+        
+        // Keyboard navigation in image viewer
+        document.addEventListener('keydown', (e) => {
+            if (imageViewer.classList.contains('active')) {
+                if (e.key === 'ArrowLeft') {
+                    currentImageIndex = (currentImageIndex - 1 + currentAlbumFiles.length) % currentAlbumFiles.length;
+                    resetImageTransform();
+                    updateImageViewer();
+                } else if (e.key === 'ArrowRight') {
+                    currentImageIndex = (currentImageIndex + 1) % currentAlbumFiles.length;
+                    resetImageTransform();
+                    updateImageViewer();
+                } else if (e.key === 'Escape') {
+                    imageViewer.classList.remove('active');
+                    document.body.style.overflow = '';
+                    resetImageTransform();
+                }
+            }
+        });
+        
+        // Pinch zoom functionality
+        viewedImage.addEventListener('touchstart', (e) => {
+            if (e.touches.length === 2) {
+                e.preventDefault();
+                initialDistance = getDistance(e.touches[0], e.touches[1]);
+            } else if (e.touches.length === 1) {
+                isDragging = true;
+                startX = e.touches[0].clientX - posX;
+                startY = e.touches[0].clientY - posY;
+            }
+        }, { passive: false });
+        
+        viewedImage.addEventListener('touchmove', (e) => {
+            if (e.touches.length === 2) {
+                e.preventDefault();
+                const currentDistance = getDistance(e.touches[0], e.touches[1]);
+                if (initialDistance !== null) {
+                    const newScale = Math.max(1, Math.min(3, scale * (currentDistance / initialDistance)));
+                    scale = newScale;
+                    updateImageTransform();
+                }
+                initialDistance = currentDistance;
+            } else if (e.touches.length === 1 && isDragging) {
+                e.preventDefault();
+                posX = e.touches[0].clientX - startX;
+                posY = e.touches[0].clientY - startY;
+                updateImageTransform();
+            }
+        }, { passive: false });
+        
+        viewedImage.addEventListener('touchend', (e) => {
+            initialDistance = null;
+            isDragging = false;
+        });
+        
+        // Mouse drag functionality
+        viewedImage.addEventListener('mousedown', (e) => {
+            if (scale > 1) {
+                e.preventDefault();
+                isDragging = true;
+                startX = e.clientX - posX;
+                startY = e.clientY - startY;
+                viewedImage.style.cursor = 'grabbing';
+            }
+        });
+        
+        viewedImage.addEventListener('mousemove', (e) => {
+            if (isDragging && scale > 1) {
+                e.preventDefault();
+                posX = e.clientX - startX;
+                posY = e.clientY - startY;
+                updateImageTransform();
+            }
+        });
+        
+        viewedImage.addEventListener('mouseup', () => {
+            isDragging = false;
+            viewedImage.style.cursor = 'grab';
+        });
+        
+        viewedImage.addEventListener('mouseleave', () => {
+            isDragging = false;
+            viewedImage.style.cursor = 'grab';
+        });
+        
+        // Helper function to calculate distance between two touch points
+        function getDistance(touch1, touch2) {
+            return Math.hypot(
+                touch2.clientX - touch1.clientX,
+                touch2.clientY - touch1.clientY
+            );
+        }
+        
+        // Download functionality
+        downloadCurrent.addEventListener('click', () => {
+            const file = currentAlbumFiles[currentImageIndex];
+            let imgPath = file.filePath;
+            if (imgPath.startsWith('/')) {
+                imgPath = imgPath.substring(1);
+            }
+            const imgUrl = `${imageKit.urlEndpoint}/${imgPath}`;
             
-            card.addEventListener('mouseup', () => {
-                card.classList.remove('active-click');
-            });
+            // Create a temporary anchor element to trigger download
+            const a = document.createElement('a');
+            a.href = imgUrl;
+            a.download = file.name || 'image';
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
             
-            card.addEventListener('mouseleave', () => {
-                card.classList.remove('active-click');
-            });
-            
-            // For touch devices
-            card.addEventListener('touchstart', () => {
-                card.classList.add('active-click');
-            });
-            
-            card.addEventListener('touchend', () => {
-                setTimeout(() => {
-                    card.classList.remove('active-click');
-                }, 200);
-            });
+            downloadPopup.classList.remove('active');
+        });
+
+        document.addEventListener('DOMContentLoaded', () => {
+            renderAlbums();
         });
     </script>
 </body>
