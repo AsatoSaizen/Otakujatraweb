@@ -7,48 +7,57 @@
   <style>
     body {
       margin: 0;
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      font-family: 'Segoe UI', sans-serif;
       background: #ffffff;
       color: #222;
     }
+
     header {
       background: #00bfff;
       padding: 30px 20px;
       text-align: center;
       color: white;
     }
+
     header img {
       width: 80px;
       height: 80px;
     }
+
     nav {
       background: #ffffff;
       padding: 10px 0;
       text-align: center;
       border-bottom: 1px solid #ddd;
     }
+
     nav a {
       text-decoration: none;
       color: #00bfff;
       margin: 0 15px;
       font-weight: bold;
     }
+
     .hero {
       background: #f0faff;
       padding: 60px 20px;
       text-align: center;
     }
+
     .hero h1 {
       font-size: 2.5em;
       margin-bottom: 10px;
     }
+
     .hero p {
       font-size: 1.2em;
       color: #555;
     }
+
     .download-buttons {
       margin-top: 30px;
     }
+
     .download-buttons a {
       display: inline-block;
       background: #00bfff;
@@ -58,50 +67,51 @@
       text-decoration: none;
       border-radius: 5px;
     }
+
     .features {
       padding: 60px 20px;
       text-align: center;
     }
+
     .features h2 {
       margin-bottom: 20px;
     }
+
     .features ul {
       list-style: none;
       padding: 0;
       max-width: 600px;
       margin: 0 auto;
     }
+
     .features li {
       padding: 10px 0;
       border-bottom: 1px solid #eee;
     }
 
-    /* Scroll Image Section */
     .scroll-section {
-      position: relative;
-      height: 1200px;
       background: #e6f7ff;
       padding: 100px 20px;
       text-align: center;
     }
+
     .scroll-section h2 {
       margin-bottom: 50px;
     }
-    .scroll-img-wrapper {
-      position: sticky;
-      top: 100px;
+
+    .screenshot {
+      opacity: 0;
+      transform: translateY(50px);
+      transition: all 0.6s ease-out;
       max-width: 300px;
-      margin: 0 auto;
-    }
-    .scroll-img-wrapper img {
-      width: 100%;
-      box-shadow: 0 5px 25px rgba(0, 0, 0, 0.15);
-      margin-bottom: 20px;
+      margin: 30px auto;
       border-radius: 12px;
-      transition: transform 0.3s ease-out;
+      box-shadow: 0 5px 25px rgba(0, 0, 0, 0.15);
     }
-    .scroll-img-wrapper img:hover {
-      transform: scale(1.05);
+
+    .screenshot.show {
+      opacity: 1;
+      transform: translateY(0);
     }
 
     footer {
@@ -110,6 +120,7 @@
       text-align: center;
       padding: 20px;
     }
+
     footer a {
       color: #00bfff;
       text-decoration: none;
@@ -152,8 +163,32 @@
     </ul>
   </div>
 
-  <!-- Scroll Animation Section -->
   <div class="scroll-section">
     <h2>Sneak Peek of the App</h2>
-    <div class="scroll-img-wrapper">
-      <img src="https://ik.imagekit.io/asatosaizen/S
+    <img class="screenshot" src="https://ik.imagekit.io/asatosaizen/Screenshot_20250417-234931_Echo.jpg" alt="Screenshot 1">
+    <img class="screenshot" src="https://ik.imagekit.io/asatosaizen/Screenshot_20250417-234941_Echo.jpg" alt="Screenshot 2">
+  </div>
+
+  <footer>
+    <p>&copy; 2025 Lark Player Clone. All rights reserved.</p>
+    <p><a href="#">Privacy Policy</a> | <a href="#">Terms</a></p>
+  </footer>
+
+  <script>
+    // Scroll reveal effect
+    const images = document.querySelectorAll('.screenshot');
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('show');
+        }
+      });
+    }, {
+      threshold: 0.3
+    });
+
+    images.forEach(img => observer.observe(img));
+  </script>
+
+</body>
+</html>
