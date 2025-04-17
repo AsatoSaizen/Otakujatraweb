@@ -5,10 +5,15 @@
   <title>Lark Player Clone</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <style>
-    body {
+    * {
       margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
       font-family: 'Segoe UI', sans-serif;
-      background: #ffffff;
+      background-color: #fff;
       color: #222;
     }
 
@@ -22,36 +27,37 @@
     header img {
       width: 80px;
       height: 80px;
+      border-radius: 10px;
     }
 
     nav {
-      background: #ffffff;
-      padding: 10px 0;
+      background: white;
+      padding: 15px 0;
       text-align: center;
-      border-bottom: 1px solid #ddd;
+      border-bottom: 1px solid #ccc;
     }
 
     nav a {
-      text-decoration: none;
+      margin: 0 20px;
       color: #00bfff;
-      margin: 0 15px;
+      text-decoration: none;
       font-weight: bold;
     }
 
     .hero {
-      background: #f0faff;
       padding: 60px 20px;
       text-align: center;
+      background: #f0faff;
     }
 
     .hero h1 {
-      font-size: 2.5em;
-      margin-bottom: 10px;
+      font-size: 2.8em;
     }
 
     .hero p {
       font-size: 1.2em;
-      color: #555;
+      color: #444;
+      margin-top: 10px;
     }
 
     .download-buttons {
@@ -59,13 +65,13 @@
     }
 
     .download-buttons a {
-      display: inline-block;
       background: #00bfff;
       color: white;
       padding: 12px 24px;
       margin: 10px;
       text-decoration: none;
-      border-radius: 5px;
+      border-radius: 6px;
+      display: inline-block;
     }
 
     .features {
@@ -79,37 +85,47 @@
 
     .features ul {
       list-style: none;
-      padding: 0;
       max-width: 600px;
       margin: 0 auto;
+      text-align: left;
     }
 
     .features li {
       padding: 10px 0;
-      border-bottom: 1px solid #eee;
+      border-bottom: 1px solid #ddd;
     }
 
-    .scroll-section {
-      background: #e6f7ff;
+    /* Animated Phone Section */
+    .phone-preview {
+      background: #e8f7ff;
       padding: 100px 20px;
       text-align: center;
     }
 
-    .scroll-section h2 {
-      margin-bottom: 50px;
+    .phone-preview h2 {
+      margin-bottom: 40px;
+      font-size: 2.2em;
     }
 
-    .screenshot {
+    .phone-container {
+      position: relative;
+      width: 300px;
+      margin: 0 auto;
+    }
+
+    .phone-image {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
       opacity: 0;
-      transform: translateY(50px);
-      transition: all 0.6s ease-out;
-      max-width: 300px;
-      margin: 30px auto;
-      border-radius: 12px;
-      box-shadow: 0 5px 25px rgba(0, 0, 0, 0.15);
+      transform: translateY(30px);
+      transition: opacity 0.8s ease, transform 0.8s ease;
+      border-radius: 24px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.2);
     }
 
-    .screenshot.show {
+    .phone-image.active {
       opacity: 1;
       transform: translateY(0);
     }
@@ -130,7 +146,7 @@
 <body>
 
   <header>
-    <img src="https://ik.imagekit.io/asatosaizen/20250417_233612.png" alt="Custom Logo">
+    <img src="https://ik.imagekit.io/asatosaizen/20250417_233612.png" alt="Logo">
     <h1>Lark Player</h1>
     <p>The best free music & video player for Android</p>
   </header>
@@ -163,11 +179,14 @@
     </ul>
   </div>
 
-  <div class="scroll-section">
-    <h2>Sneak Peek of the App</h2>
-    <img class="screenshot" src="https://ik.imagekit.io/asatosaizen/Screenshot_20250417-234931_Echo.jpg" alt="Screenshot 1">
-    <img class="screenshot" src="https://ik.imagekit.io/asatosaizen/Screenshot_20250417-234941_Echo.jpg" alt="Screenshot 2">
-  </div>
+  <!-- Animated Phone Preview Section -->
+  <section class="phone-preview">
+    <h2>App Preview</h2>
+    <div class="phone-container">
+      <img class="phone-image active" id="img1" src="https://ik.imagekit.io/asatosaizen/Screenshot_20250417-234931_Echo.jpg?updatedAt=1744913177657" alt="App Screen 1">
+      <img class="phone-image" id="img2" src="https://ik.imagekit.io/asatosaizen/Screenshot_20250417-234941_Echo.jpg?updatedAt=1744913930921" alt="App Screen 2">
+    </div>
+  </section>
 
   <footer>
     <p>&copy; 2025 Lark Player Clone. All rights reserved.</p>
@@ -175,19 +194,21 @@
   </footer>
 
   <script>
-    // Scroll reveal effect
-    const images = document.querySelectorAll('.screenshot');
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('show');
-        }
-      });
-    }, {
-      threshold: 0.3
-    });
+    // Simple loop between images
+    const img1 = document.getElementById('img1');
+    const img2 = document.getElementById('img2');
+    let showingFirst = true;
 
-    images.forEach(img => observer.observe(img));
+    setInterval(() => {
+      if (showingFirst) {
+        img1.classList.remove('active');
+        img2.classList.add('active');
+      } else {
+        img2.classList.remove('active');
+        img1.classList.add('active');
+      }
+      showingFirst = !showingFirst;
+    }, 3000); // switch every 3 seconds
   </script>
 
 </body>
